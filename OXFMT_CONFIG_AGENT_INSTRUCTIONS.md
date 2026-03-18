@@ -15,9 +15,11 @@ Config lives in `.oxfmtrc.json` or `.oxfmtrc.jsonc` (JSON format). Oxfmt does NO
 Since oxfmt has no built-in `extends` mechanism, our package exports JSON objects that consumers spread or reference. Two approaches:
 
 ### Approach A — Export JSON files directly
+
 The package publishes pre-built `.oxfmtrc.json` files. Consumers copy them or symlink them. Simple but no composition.
 
 ### Approach B — Export JS/TS config objects (RECOMMENDED)
+
 Oxfmt supports `.oxfmtrc.ts` / `.oxfmtrc.mts` / `.oxfmtrc.js` / `.oxfmtrc.mjs` config files with a default export. This means consumers can:
 
 ```ts
@@ -64,6 +66,7 @@ This is the approach to use. It allows composition and per-language overrides.
 ## Config presets to define
 
 ### `base` — The foundation (spread first, always)
+
 ```ts
 export const base = {
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -84,6 +87,7 @@ export const base = {
 ```
 
 ### `typescript` — TS-specific (currently same as base, but separated for future divergence)
+
 ```ts
 export const typescript = {
   // Placeholder — TS-specific overrides go here when needed.
@@ -93,6 +97,7 @@ export const typescript = {
 ```
 
 ### `markdown` — Prose formatting
+
 ```ts
 export const markdown = {
   proseWrap: 'preserve',  // don't rewrap markdown prose
@@ -101,6 +106,7 @@ export const markdown = {
 ```
 
 ### `json` — JSON files
+
 ```ts
 export const json = {
   tabWidth: 2,
@@ -109,6 +115,7 @@ export const json = {
 ```
 
 ### `css` — CSS/SCSS/Less
+
 ```ts
 export const css = {
   singleQuote: false,     // CSS convention: double quotes
@@ -116,6 +123,7 @@ export const css = {
 ```
 
 ### `sorting` — Import and package.json sorting
+
 ```ts
 export const sorting = {
   organizeImports: true,
@@ -194,11 +202,13 @@ export default defineConfig({
 ## Consumer usage
 
 ### Installation
+
 ```bash
 pnpm add -D oxfmt @finografic/oxfmt-config
 ```
 
 ### Config file (`.oxfmtrc.ts`)
+
 ```ts
 import { defineConfig } from 'oxfmt';
 import { base, sorting, markdown, css } from '@finografic/oxfmt-config';
@@ -220,6 +230,7 @@ export default defineConfig({
 ```
 
 ### lint-staged
+
 ```json
 {
   "lint-staged": {
@@ -235,6 +246,7 @@ export default defineConfig({
 ```
 
 ### VS Code / Cursor settings
+
 ```json
 {
   "editor.defaultFormatter": "oxc.oxc-vscode",
