@@ -1,42 +1,42 @@
 {
   "name": "@finografic/oxfmt-config",
-  "type": "module",
-  "version": "0.0.0",
-  "packageManager": "pnpm@10.8.0",
+  "version": "0.1.0",
   "description": "High-performance, pinionated oxfmt formatter for the finografic ecosystem",
+  "keywords": [
+    "config",
+    "finografic",
+    "genx:type:config",
+    "oxfmt-config",
+    "shared-config"
+  ],
   "homepage": "https://github.com/finografic/oxfmt-config",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/finografic/oxfmt-config.git"
-  },
   "bugs": {
     "url": "https://github.com/finografic/oxfmt-config/issues"
   },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
+  "license": "MIT",
   "author": {
     "name": "Justin Rankin",
     "email": "justin.blair.rankin@gmail.com",
     "url": "https://github.com/finografic"
   },
-  "license": "MIT",
-  "keywords": [
-    "finografic",
-    "oxfmt-config",
-    "genx:type:config",
-    "config",
-    "shared-config"
-  ],
-  "main": "./dist/index.mjs",
-  "types": "./dist/index.d.mts",
-  "module": "./dist/index.mjs",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/finografic/oxfmt-config.git"
+  },
   "files": [
-    "dist"
+    "dist",
+    "internal/schemas"
   ],
+  "type": "module",
+  "main": "./dist/index.mjs",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.mts",
   "exports": {
     ".": "./dist/index.mjs",
     "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "---------- DEV": "-------------------------------------------------------",
@@ -73,7 +73,8 @@
     "typecheck": "tsc --project tsconfig.json --noEmit",
     "prepack": "pnpm build",
     "prepare": "simple-git-hooks",
-    "update.dprint-config": "pnpm update @finografic/dprint-config --latest"
+    "update.dprint-config": "pnpm update @finografic/dprint-config --latest",
+    "update.schema": "tsx ./scripts/update-schema.ts"
   },
   "devDependencies": {
     "@commitlint/cli": "^20.2.0",
@@ -93,9 +94,16 @@
     "oxfmt": "^0.41.0",
     "simple-git-hooks": "^2.13.1",
     "tsdown": "^0.20.3",
+    "tsx": "^4.21.0",
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.51.0",
     "vitest": "^4.0.18"
+  },
+  "peerDependencies": {
+    "oxfmt": ">=0.41.0"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "npx lint-staged --allow-empty"
   },
   "lint-staged": {
     "*": "oxfmt --no-error-on-unmatched-pattern",
@@ -105,7 +113,5 @@
     ],
     "*.{json,jsonc,md,yml,yaml,toml}": []
   },
-  "simple-git-hooks": {
-    "pre-commit": "npx lint-staged --allow-empty"
-  }
+  "packageManager": "pnpm@10.8.0"
 }

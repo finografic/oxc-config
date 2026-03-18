@@ -1,0 +1,10 @@
+Can you please follow @OXFMT_CONFIG_AGENT_INSTRUCTIONS.md   in order to complete this project (draft/beta/testable) as an INSTALLABLE OXFMT CONFIG library ??  I guess it compiles the one export that is the configuration to be used by the consumer project.. not exactly sure...
+
+/Users/justin/repos-finografic/@finografic-oxfmt-config/
+
+
+Feel free to check out a similar repo i made for drpint:
+/Users/justin/repos-finografic/@finografic-dprint-config/package.json
+
+The config/ folder is probably a good pattern to align with..
+Also, that other project has some generators and fetch commands to fetch the JSON Schema from github and convert it to a local file (feel free to take a completely different appraoch)
