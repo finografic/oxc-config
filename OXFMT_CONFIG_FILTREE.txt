@@ -1,0 +1,31 @@
+.
+├── AGENTS.md
+├── CLAUDE.md
+├── commitlint.config.mjs
+├── dist
+│   ├── index.d.mts
+│   ├── index.d.mts.map
+│   ├── index.mjs
+│   └── index.mjs.map
+├── docs
+│   ├── OXFMT_README.md
+│   └── process
+│       ├── DEVELOPER_WORKFLOW.md
+│       ├── GITHUB_PACKAGES_SETUP.md
+│       └── RELEASE_PROCESS.md
+├── dprint.jsonc
+├── eslint.config.ts
+├── Icon\015
+├── LICENSE
+├── OXFMT_CONFIG_FILTREE.txt
+├── package.json
+├── pnpm-lock.yaml
+├── README.md
+├── src
+│   ├── declarations.d.ts
+│   └── index.ts
+├── tsconfig.json
+├── tsdown.config.ts
+└── vitest.config.ts
+
+5 directories, 24 files
