@@ -5,9 +5,9 @@
  * No stylistic rules, no import sorting (oxfmt does both).
  */
 import js from '@eslint/js';
-import type { Linter } from 'eslint';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import type { Linter } from 'eslint';
 
 const config: Linter.Config[] = [
   {

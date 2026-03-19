@@ -102,8 +102,14 @@ const r1 = ensureKeyword(keywords, finograficKw);
 const r2 = ensureKeyword(updated, packageName);
 
 // ✅ GOOD: Descriptive names
-const finograficKeywordResult = ensureKeyword(keywords, includeFinograficKeyword);
-const packageNameKeywordResult = ensureKeyword(updated, packageNameWithoutScope);
+const finograficKeywordResult = ensureKeyword(
+  keywords,
+  includeFinograficKeyword,
+);
+const packageNameKeywordResult = ensureKeyword(
+  updated,
+  packageNameWithoutScope,
+);
 ```
 
 ## Import Aliases

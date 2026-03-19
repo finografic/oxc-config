@@ -13,7 +13,12 @@ interface CreateUserParams {
   role: 'admin' | 'user';
   isActive?: boolean;
 }
-const createUser = ({ name, email, role, isActive = true }: CreateUserParams) => {};
+const createUser = ({
+  name,
+  email,
+  role,
+  isActive = true,
+}: CreateUserParams) => {};
 ```
 
 ## Benefits

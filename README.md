@@ -15,19 +15,19 @@ pnpm add -D oxfmt @finografic/oxfmt-config
 Create an `.oxfmtrc.ts` in your project root:
 
 ```ts
-import { defineConfig } from "oxfmt";
-import { base, sorting, markdown, css } from "@finografic/oxfmt-config";
+import { defineConfig } from 'oxfmt';
+import { base, sorting, markdown, css } from '@finografic/oxfmt-config';
 
 export default defineConfig({
   ...base,
   ...sorting,
   overrides: [
     {
-      files: ["*.md", "*.mdx"],
+      files: ['*.md', '*.mdx'],
       options: { ...markdown },
     },
     {
-      files: ["*.css", "*.scss"],
+      files: ['*.css', '*.scss'],
       options: { ...css },
     },
   ],
@@ -50,8 +50,13 @@ export default defineConfig({
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": ["oxfmt --no-error-on-unmatched-pattern", "eslint --fix"],
-    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": ["oxfmt --no-error-on-unmatched-pattern"]
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "oxfmt --no-error-on-unmatched-pattern",
+      "eslint --fix"
+    ],
+    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
   }
 }
 ```
