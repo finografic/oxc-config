@@ -1,7 +1,7 @@
 {
   "name": "@finografic/oxfmt-config",
   "version": "0.3.0",
-  "description": "High-performance, pinionated oxfmt formatter for the finografic ecosystem",
+  "description": "High-performance, opinionated oxfmt formatter for the finografic ecosystem",
   "keywords": [
     "config",
     "finografic",
@@ -54,15 +54,24 @@
     "·········· LINTING": "···················································",
     "lint": "eslint .",
     "lint.fix": "eslint . --fix",
-    "·········· FORMATTING": "··················································",
+    "·········· FORMATTING": "················································",
     "format.check": "dprint check",
     "format.fix": "dprint fmt --diff",
+    "·········· CHECK / FIX": "···············································",
+    "check": "pnpm format.check && pnpm lint && pnpm typecheck && pnpm test.run",
+    "fix": "pnpm format.fix && pnpm lint.fix",
+    "guard.clean": "git diff --exit-code && git diff --cached --exit-code",
+    "·········· RELEASE": "···················································",
+    "release.check": "pnpm guard.clean && pnpm check && pnpm guard.clean",
+    "release.github.patch": "pnpm release.check && pnpm version patch && git push --follow-tags",
+    "release.github.minor": "pnpm release.check && pnpm version minor && git push --follow-tags",
+    "release.github.major": "pnpm release.check && pnpm version major && git push --follow-tags",
     "·········· PUBLISH.GITHUB": "············································",
-    "release.github.patch": "pnpm run release.check && pnpm version patch && git push --follow-tags",
-    "release.github.minor": "pnpm run release.check && pnpm version minor && git push --follow-tags",
-    "release.github.major": "pnpm run release.check && pnpm version major && git push --follow-tags",
-    "release.check": "pnpm format.check && pnpm lint.fix && pnpm typecheck && pnpm test.run",
-    "release.publish": "pnpm publish --registry https://npm.pkg.github.com",
+    "_release.github.patch": "pnpm run release.check && pnpm version patch && git push --follow-tags",
+    "_release.github.minor": "pnpm run release.check && pnpm version minor && git push --follow-tags",
+    "_release.github.major": "pnpm run release.check && pnpm version major && git push --follow-tags",
+    "_release.check": "pnpm format.check && pnpm lint.fix && pnpm typecheck && pnpm test.run",
+    "_release.publish": "pnpm publish --registry https://npm.pkg.github.com",
     "·········· REGISTRIES": "················································",
     "view.registry.github": "pnpm view @finografic/oxfmt-config --registry=https://npm.pkg.github.com",
     "·········· PACKAGES": "··················································",
@@ -111,7 +120,9 @@
       "dprint fmt --allow-no-files",
       "eslint --fix"
     ],
-    "*.{json,jsonc,md,yml,yaml,toml}": []
+    "*.{json,jsonc,md,yml,yaml,toml}": [
+      "dprint fmt --allow-no-files"
+    ]
   },
   "packageManager": "pnpm@10.8.0"
 }

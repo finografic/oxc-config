@@ -12,7 +12,8 @@ build/
 .env.*.local
 
 # IDE
-.cursor/chats
+.cursor/chats/
+.cursor/hooks/
 .claude/
 !.claude/settings.json
 .idea/
