@@ -40,8 +40,6 @@
   },
   "scripts": {
     "---------- DEV": "-------------------------------------------------------",
-    "fmt": "oxfmt",
-    "fmt:check": "oxfmt --check",
     "dev": "tsdown --watch",
     "link": "pnpm build && pnpm link --global",
     "unlink": "pnpm unlink --global",
@@ -55,28 +53,21 @@
     "lint": "eslint .",
     "lint.fix": "eslint . --fix",
     "·········· FORMATTING": "················································",
-    "format.check": "dprint check",
-    "format.fix": "dprint fmt --diff",
+    "format": "oxfmt",
+    "format.check": "oxfmt --check",
     "·········· CHECK / FIX": "···············································",
     "check": "pnpm format.check && pnpm lint && pnpm typecheck && pnpm test.run",
-    "fix": "pnpm format.fix && pnpm lint.fix",
+    "fix": "pnpm format && pnpm lint.fix",
     "guard.clean": "git diff --exit-code && git diff --cached --exit-code",
-    "·········· RELEASE": "···················································",
-    "release.check": "pnpm guard.clean && pnpm check && pnpm guard.clean",
-    "release.github.patch": "pnpm release.check && pnpm version patch && git push --follow-tags",
-    "release.github.minor": "pnpm release.check && pnpm version minor && git push --follow-tags",
-    "release.github.major": "pnpm release.check && pnpm version major && git push --follow-tags",
     "·········· PUBLISH.GITHUB": "············································",
-    "_release.github.patch": "pnpm run release.check && pnpm version patch && git push --follow-tags",
-    "_release.github.minor": "pnpm run release.check && pnpm version minor && git push --follow-tags",
-    "_release.github.major": "pnpm run release.check && pnpm version major && git push --follow-tags",
-    "_release.check": "pnpm format.check && pnpm lint.fix && pnpm typecheck && pnpm test.run",
-    "_release.publish": "pnpm publish --registry https://npm.pkg.github.com",
+    "release.github.patch": "pnpm run release.check && pnpm version patch && git push --follow-tags",
+    "release.github.minor": "pnpm run release.check && pnpm version minor && git push --follow-tags",
+    "release.github.major": "pnpm run release.check && pnpm version major && git push --follow-tags",
+    "release.check": "pnpm format.check && pnpm lint.fix && pnpm typecheck && pnpm test.run",
+    "release.publish": "pnpm publish --registry https://npm.pkg.github.com",
     "·········· REGISTRIES": "················································",
     "view.registry.github": "pnpm view @finografic/oxfmt-config --registry=https://npm.pkg.github.com",
     "·········· PACKAGES": "··················································",
-    "update.eslint-config": "pnpm update @finografic/eslint-config --latest",
-    "update.dprint-config": "pnpm update @finografic/dprint-config --latest",
     "upgrade.deps.all": "pnpm update --latest",
     "·········· UTILS": "·····················································",
     "update.schema": "tsx ./scripts/update-schema.ts",
@@ -89,12 +80,10 @@
     "@commitlint/cli": "^20.2.0",
     "@commitlint/config-conventional": "^20.2.0",
     "@eslint/js": "^9.39.2",
-    "@finografic/dprint-config": "^0.14.0",
     "@stylistic/eslint-plugin": "^5.6.1",
     "@types/node": "^24.0.0",
     "@typescript-eslint/eslint-plugin": "^8.51.0",
     "@typescript-eslint/parser": "^8.51.0",
-    "dprint": "^0.51.1",
     "eslint": "9.39.2",
     "eslint-plugin-markdownlint": "^0.9.0",
     "eslint-plugin-simple-import-sort": "^12.1.1",
@@ -115,13 +104,12 @@
     "pre-commit": "npx lint-staged --allow-empty"
   },
   "lint-staged": {
-    "*": "oxfmt --no-error-on-unmatched-pattern",
     "*.{ts,tsx,js,jsx,mjs,cjs}": [
-      "dprint fmt --allow-no-files",
+      "oxfmt --no-error-on-unmatched-pattern",
       "eslint --fix"
     ],
-    "*.{json,jsonc,md,yml,yaml,toml}": [
-      "dprint fmt --allow-no-files"
+    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": [
+      "oxfmt --no-error-on-unmatched-pattern"
     ]
   },
   "packageManager": "pnpm@10.8.0"
