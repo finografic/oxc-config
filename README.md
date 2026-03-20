@@ -1,4 +1,4 @@
-# @finografic/oxfmt-config
+# 🛠️ @finografic/oxfmt-config
 
 > Shareable oxfmt formatter configuration for the finografic ecosystem
 

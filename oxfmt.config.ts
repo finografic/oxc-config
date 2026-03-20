@@ -1,8 +1,9 @@
 import { defineConfig } from 'oxfmt';
 
-import { base, sorting, markdown, css } from './dist/index.mjs';
+import { base, sorting, markdown, css, ignores } from './dist/index.mjs';
 
 export default defineConfig({
+  ...ignores,
   ...base,
   ...sorting,
   overrides: [

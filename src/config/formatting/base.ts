@@ -15,9 +15,4 @@ export const base = {
   endOfLine: 'lf',
   singleAttributePerLine: false,
   insertFinalNewline: true,
-  ignorePatterns: [],
-  sortImports: {},
-  sortPackageJson: {
-    sortScripts: false, // keep manual script ordering (our convention)
-  },
 } as const satisfies Partial<OxfmtConfig>;

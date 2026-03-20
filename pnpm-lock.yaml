@@ -17,6 +17,9 @@ importers:
       '@eslint/js':
         specifier: ^9.39.2
         version: 9.39.4
+      '@finografic/core':
+        specifier: ^0.10.1
+        version: 0.10.1
       '@stylistic/eslint-plugin':
         specifier: ^5.6.1
         version: 5.10.0(eslint@9.39.2(jiti@2.6.1))
@@ -384,6 +387,9 @@ packages:
   '@eslint/plugin-kit@0.4.1':
     resolution: {integrity: sha512-43/qtrDUokr7LJqoF2c3+RInu/t4zfrpYdoSDfYyhg52rwLV6TnOvdG4fXm7IkSB3wErkcmJS9iEhjVtOSEjjA==}
     engines: {node: ^18.18.0 || ^20.9.0 || >=21.1.0}
+
+  '@finografic/core@0.10.1':
+    resolution: {integrity: sha512-mIFiXz+F1ZCJ56JkKyr2XH1l5dPFsw7NlX5FzVkjb1F9HLtlWcRqjPjRoiC0asZ+Hf5XTQcpgA4pJY3nmD3CZQ==, tarball: https://npm.pkg.github.com/download/@finografic/core/0.10.1/0b391b88a78660c7c3d57cc816bbe3a8c83baad3}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -1478,6 +1484,9 @@ packages:
   lodash.upperfirst@4.3.1:
     resolution: {integrity: sha512-sReKOYJIJf74dhJONhU4e0/shzi1trVbSWDOhKYE5XV2O+H7Sb2Dihwuc7xWxVl+DgFPyTqIN3zMfT9cq5iWDg==}
 
+  lodash@4.17.21:
+    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
+
   log-update@6.1.0:
     resolution: {integrity: sha512-9ie8ItPR6tjY5uYJh8K/Zrv/RMZ5VOlOWvtZdEHYSTFKZfIBPQa9tOAEeAWhd+AnIneLJ22w5fjOYtoutpWq5w==}
     engines: {node: '>=18'}
@@ -2321,6 +2330,10 @@ snapshots:
     dependencies:
       '@eslint/core': 0.17.0
       levn: 0.4.1
+
+  '@finografic/core@0.10.1':
+    dependencies:
+      lodash: 4.17.21
 
   '@humanfs/core@0.19.1': {}
 
@@ -3249,6 +3262,8 @@ snapshots:
   lodash.startcase@4.4.0: {}
 
   lodash.upperfirst@4.3.1: {}
+
+  lodash@4.17.21: {}
 
   log-update@6.1.0:
     dependencies:
