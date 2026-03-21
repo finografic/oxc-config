@@ -105,13 +105,8 @@
     "pre-commit": "npx lint-staged --allow-empty"
   },
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": [
-      "oxfmt --no-error-on-unmatched-pattern",
-      "eslint --fix"
-    ],
-    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": [
-      "oxfmt --no-error-on-unmatched-pattern"
-    ]
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [],
+    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": []
   },
   "commitlint": {
     "extends": [

@@ -15,8 +15,14 @@ pnpm add -D oxfmt @finografic/oxfmt-config
 Create a `oxfmt.config.ts` in your project root:
 
 ```ts
-import { defineConfig } from "oxfmt";
-import { base, sorting, markdown, css, ignores } from "@finografic/oxfmt-config";
+import { defineConfig } from 'oxfmt';
+import {
+  base,
+  sorting,
+  markdown,
+  css,
+  ignores,
+} from '@finografic/oxfmt-config';
 
 export default defineConfig({
   ...ignores,
@@ -24,11 +30,11 @@ export default defineConfig({
   ...sorting,
   overrides: [
     {
-      files: ["*.md", "*.mdx"],
+      files: ['*.md', '*.mdx'],
       options: { ...markdown },
     },
     {
-      files: ["*.css", "*.scss"],
+      files: ['*.css', '*.scss'],
       options: { ...css },
     },
   ],
@@ -55,15 +61,20 @@ Presets live under `src/config/formatting/` (`base`, `typescript`, `json`, `mark
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": ["oxfmt --no-error-on-unmatched-pattern", "eslint --fix"],
-    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": ["oxfmt --no-error-on-unmatched-pattern"]
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "oxfmt --no-error-on-unmatched-pattern",
+      "eslint --fix"
+    ],
+    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": [
+      "oxfmt --no-error-on-unmatched-pattern"
+    ]
   }
 }
 ```
 
 ## Editor Setup
 
-Install the **Oxc** VS Code extension (`oxc.oxc-vscode`). This workspace uses `.vscode/settings.json` with **oxfmt** as the default formatter (see also `oxc.fmt.configPath` → `oxfmt.config.ts`).
+Install the **Oxc** VS Code extension (`oxc.oxc-vscode`). This workspace uses `.vscode/settings.json` with **oxfmt** as the default formatter. **oxfmt** picks up `oxfmt.config.ts` (or other supported config names) at the project root automatically — you usually do **not** need `oxc.fmt.configPath` unless the config lives elsewhere. If you set `oxc.fmt.configPath`, use a real path; **`${workspaceFolder}` is not expanded** when passed to the formatter binary.
 
 Minimal example:
 
@@ -71,8 +82,7 @@ Minimal example:
 {
   "editor.defaultFormatter": "oxc.oxc-vscode",
   "editor.formatOnSave": true,
-  "editor.formatOnSaveMode": "file",
-  "oxc.fmt.configPath": "${workspaceFolder}/oxfmt.config.ts"
+  "editor.formatOnSaveMode": "file"
 }
 ```
 
