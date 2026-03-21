@@ -255,5 +255,5 @@ This workflow is designed for:
 
 ## Related Documentation
 
-- [Release Process](./RELEASES.md) - Release commands and verification
+- [Release Process](./RELEASE_PROCESS.md) — release commands and verification
 - [GitHub Packages Setup](./GITHUB_PACKAGES_SETUP.md) - Initial configuration (if applicable)

@@ -12,22 +12,23 @@ pnpm add -D oxfmt @finografic/oxfmt-config
 
 ## Usage
 
-Create an `.oxfmtrc.ts` in your project root:
+Create a `oxfmt.config.ts` in your project root:
 
 ```ts
-import { defineConfig } from 'oxfmt';
-import { base, sorting, markdown, css } from '@finografic/oxfmt-config';
+import { defineConfig } from "oxfmt";
+import { base, sorting, markdown, css, ignores } from "@finografic/oxfmt-config";
 
 export default defineConfig({
+  ...ignores,
   ...base,
   ...sorting,
   overrides: [
     {
-      files: ['*.md', '*.mdx'],
+      files: ["*.md", "*.mdx"],
       options: { ...markdown },
     },
     {
-      files: ['*.css', '*.scss'],
+      files: ["*.css", "*.scss"],
       options: { ...css },
     },
   ],
@@ -45,34 +46,37 @@ export default defineConfig({
 | `css`        | CSS/SCSS/Less files                | `singleQuote: false` (CSS convention)     |
 | `sorting`    | Import + package.json sorting      | `sortImports`, `sortPackageJson`          |
 
+## Source layout (this repo)
+
+Presets live under `src/config/formatting/` (`base`, `typescript`, `json`, `markdown`, `css`, `sorting`, etc.). Optional `ignores` glob patterns are in `src/config/ignores.ts`. Composable import-sort groups (`SORTING_GROUP_*`) are in `src/config/sorting-groups/`. The package entry re-exports from `src/index.ts`.
+
 ## lint-staged
 
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": [
-      "oxfmt --no-error-on-unmatched-pattern",
-      "eslint --fix"
-    ],
-    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": [
-      "oxfmt --no-error-on-unmatched-pattern"
-    ]
+    "*.{ts,tsx,js,jsx,mjs,cjs}": ["oxfmt --no-error-on-unmatched-pattern", "eslint --fix"],
+    "*.{json,jsonc,md,yml,yaml,toml,css,scss,html}": ["oxfmt --no-error-on-unmatched-pattern"]
   }
 }
 ```
 
 ## Editor Setup
 
-Add to `.vscode/settings.json` (or Cursor equivalent):
+Install the **Oxc** VS Code extension (`oxc.oxc-vscode`). This workspace uses `.vscode/settings.json` with **oxfmt** as the default formatter (see also `oxc.fmt.configPath` → `oxfmt.config.ts`).
+
+Minimal example:
 
 ```json
 {
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  "editor.formatOnSave": true
+  "editor.formatOnSave": true,
+  "editor.formatOnSaveMode": "file",
+  "oxc.fmt.configPath": "${workspaceFolder}/oxfmt.config.ts"
 }
 ```
 
-See [oxc.rs formatter docs](https://oxc.rs/docs/guide/usage/formatter) for the VS Code extension and full configuration reference.
+See [oxc.rs formatter docs](https://oxc.rs/docs/guide/usage/formatter) and `.vscode/oxc.oxc-vscode.extension.md` for extension settings (oxlint, oxfmt paths, etc.).
 
 ## License
 

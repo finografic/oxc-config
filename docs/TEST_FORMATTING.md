@@ -1,4 +1,4 @@
-# Test if @fingorafic/oxfmt-config is formatting correctly
+# Test if @finografic/oxfmt-config is formatting correctly
 
 ```bash
 # 1. Build and pack (from oxfmt-config root)
