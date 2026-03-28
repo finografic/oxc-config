@@ -101,6 +101,7 @@
   "peerDependencies": {
     "oxfmt": ">=0.41.0"
   },
+  "packageManager": "pnpm@10.8.0",
   "lint-staged": {
     "*.{ts,tsx,js,jsx,mjs,cjs}": [
       "oxfmt --no-error-on-unmatched-pattern",
@@ -116,7 +117,6 @@
     ]
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged --allow-empty"
-  },
-  "packageManager": "pnpm@10.8.0"
+    "pre-commit": "npx lint-staged --allow-empty && dprint check && pnpm exec eslint \"**/*.md\""
+  }
 }

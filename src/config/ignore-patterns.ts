@@ -7,4 +7,5 @@ export const ignorePatterns = [
   '**/.cursor/**',
   '**/*.min.*',
   '**/*.map',
+  '**/.github/**',
 ] as const satisfies OxfmtConfig['ignorePatterns'];
