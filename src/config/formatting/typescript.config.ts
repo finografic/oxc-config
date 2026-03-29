@@ -11,4 +11,6 @@ import type { OxfmtConfig } from 'oxfmt';
  *
  * @see https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html
  */
-export const typescript = {} as const satisfies Partial<OxfmtConfig>;
+export const typescript = {
+  quoteStyle: 'consistent',
+} as const satisfies Partial<OxfmtConfig>;

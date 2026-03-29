@@ -41,3 +41,8 @@ Project-specific rules live in `.github/instructions/project/`. Add `*.instructi
 
 - When documenting sorting, use current group names (`hooks`, `client-routes`, `server-routes`, `tests`, …) — not the removed `hooks-routes` / `SORTING_GROUP_HOOKS_ROUTES`.
 - Prefer linking to `docs/SETUP_OXFMT_CONFIG.md` and `docs/OXFMT_SORT_GROUPS.md` for formatter and import-sort details.
+- For agent instruction markdown, prefer narrow path targeting plus `AGENT_DOC_PATHS` / `agentMarkdown` (see `src/config/patterns/agent-docs.patterns.ts`) over blanket `**/.github/**` ignores when other `.github` markdown should still format; excluding `**/.claude/**` is a common choice for local-only agent files.
+
+## Learned Workspace Facts
+
+- `ignorePatterns` in `src/config/patterns/ignore.patterns.ts` deliberately omits blanket `**/.github/**` and `**/.cursor/**`; known agent doc paths are handled via overrides/constants in `agent-docs.patterns.ts`, not by skipping entire `.github` / `.cursor` trees.
