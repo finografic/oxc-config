@@ -39,7 +39,7 @@
     "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
-    "---------- DEV_AND_BUILD": "-------------------------------------------------------",
+    "---------- DEV_AND_BUILD": "---------------------------------------------",
     "dev": "tsdown --watch",
     "link": "pnpm build && pnpm link --global",
     "unlink": "pnpm unlink --global",
