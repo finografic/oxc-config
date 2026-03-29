@@ -35,7 +35,6 @@ Project-specific rules live in `.github/instructions/project/`. Add `*.instructi
 - **Source layout:** formatting presets in `src/config/formatting/`; ignore globs and agent instruction paths in `src/config/patterns/`; `SORTING_GROUP_*` and `SORT_PRESET_*` in `src/config/sorting-groups/`. Public API: `src/index.ts` → `dist/index.mjs`.
 - Root **`oxfmt.config.ts`** imports from `./dist/index.mjs` (rebuild with `pnpm build` after changing `src/`).
 - **Hooks:** `simple-git-hooks` pre-commit runs `lint-staged` then `oxfmt`; `lint-staged` runs ESLint before oxfmt on code and Markdown (see `package.json`).
-- **Consumers (other repos):** migration from dprint/Prettier and hook/editor patterns are documented in **`MIGRATION_GUIDE.md`** (shipped in the package under `files`); link or summarize it when helping someone adopt this package — it is not specific to developing _this_ repo.
 - Do not include `Co-Authored-By` lines in commit messages.
 
 ## Learned User Preferences
