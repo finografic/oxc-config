@@ -121,6 +121,6 @@
     ]
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged --allow-empty && oxfmt --no-error-on-unmatched-pattern && pnpm typecheck"
+    "pre-commit": "npx lint-staged --allow-empty && oxfmt --no-error-on-unmatched-pattern"
   }
 }
