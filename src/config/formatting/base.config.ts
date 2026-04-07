@@ -6,6 +6,7 @@ export const base = {
   useTabs: false,
   semi: true,
   singleQuote: true,
+  quoteProps: 'consistent',
   jsxSingleQuote: false,
   trailingComma: 'all',
   bracketSpacing: true,
