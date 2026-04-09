@@ -1,6 +1,6 @@
 {
   "name": "@finografic/oxfmt-config",
-  "version": "1.3.4",
+  "version": "1.4.0",
   "description": "High-performance, opinionated oxfmt formatter for the finografic ecosystem",
   "keywords": [
     "config",
