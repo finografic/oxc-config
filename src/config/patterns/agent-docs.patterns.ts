@@ -68,5 +68,5 @@ export const AGENT_DOC_MARKDOWN_PATHS = AGENT_DOC_PATHS.filter(
  */
 export const agentMarkdown = {
   proseWrap: 'preserve',
-  printWidth: 10000,
+  printWidth: 320,
 } as const satisfies Partial<OxfmtConfig>;
