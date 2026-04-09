@@ -21,6 +21,7 @@ export const AGENT_DOC_PATHS = [
   '.github/copilot-instructions.md',
   '.github/instructions/**/*.md',
   '.github/prompts/**/*.md',
+  '.github/skills/**/*.md',
 
   // ── Cursor ──────────────────────────────────────────
   '.cursorrules',
@@ -67,5 +68,5 @@ export const AGENT_DOC_MARKDOWN_PATHS = AGENT_DOC_PATHS.filter(
  */
 export const agentMarkdown = {
   proseWrap: 'preserve',
-  printWidth: 110,
+  printWidth: 10000,
 } as const satisfies Partial<OxfmtConfig>;
