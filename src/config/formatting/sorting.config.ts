@@ -5,16 +5,19 @@
  * configuration used across the @finografic / @workspace ecosystem.
  *
  * @see https://oxc.rs/docs/guide/usage/formatter/sorting.html
+ * @see https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html#sortimports
+ * @see https://perfectionist.dev/rules/sort-imports  (Oxfmt sorting based on this)
  */
 import type { OxfmtConfig } from 'oxfmt';
 
 export const sorting = {
   sortImports: {
     newlinesBetween: false,
+    partitionByComment: true,
     customGroups: [
       {
         groupName: 'workspace',
-        elementNamePattern: ['@finografic/**', '@workspace/**'],
+        elementNamePattern: ['@workspace/**', '@finografic/**'],
       },
       {
         groupName: 'lib-utils',

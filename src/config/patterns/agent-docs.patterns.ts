@@ -1,4 +1,4 @@
-import type { OxfmtConfig } from 'oxfmt';
+import type { OxfmtConfig } from 'types/oxfmt.types';
 
 /**
  * Known agent/AI instruction document paths across the ecosystem.

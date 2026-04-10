@@ -20,7 +20,16 @@
     "forceConsistentCasingInFileNames": true,
     "outDir": "./dist",
     "rootDir": "./src",
-    "baseUrl": "."
+    "baseUrl": ".",
+    "paths": {
+      "formatting": ["./src/config/formatting/index.ts"],
+      "formatting/*": ["./src/config/formatting/*"],
+      "patterns": ["./src/config/patterns/index.ts"],
+      "patterns/*": ["./src/config/patterns/*"],
+      "sorting-groups": ["./src/config/sorting-groups/index.ts"],
+      "sorting-groups/*": ["./src/config/sorting-groups/*"],
+      "types/*": ["./src/types/*"]
+    }
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]

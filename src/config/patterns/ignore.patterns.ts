@@ -1,4 +1,4 @@
-import type { OxfmtConfig } from 'oxfmt';
+import type { OxfmtConfig } from 'types/oxfmt.types';
 
 export const ignorePatterns = [
   '**/node_modules/**',

@@ -1,4 +1,4 @@
-import type { CustomGroupItemConfig } from 'src/types/sorting.types';
+import type { CustomGroupItemConfig } from 'types/sorting.types';
 
 // ── Server / backend groups ───────────────────────────
 

@@ -1,18 +1,18 @@
-import type { OxfmtConfig } from 'oxfmt';
+import type { OxfmtConfig } from 'types/oxfmt.types';
+import { jsdocConfig } from './jsdoc.config';
 
 export const base = {
+  arrowParens: 'always',
+  bracketSpacing: true,
+  endOfLine: 'lf',
+  insertFinalNewline: true,
+  objectWrap: 'preserve', // "preserve" (default) | "collapse";
   printWidth: 110,
-  tabWidth: 2,
-  useTabs: false,
+  quoteProps: 'consistent',
   semi: true,
   singleQuote: true,
-  quoteProps: 'consistent',
-  jsxSingleQuote: false,
+  tabWidth: 2,
   trailingComma: 'all',
-  bracketSpacing: true,
-  bracketSameLine: false,
-  arrowParens: 'always',
-  endOfLine: 'lf',
-  singleAttributePerLine: false,
-  insertFinalNewline: true,
+  useTabs: false,
+  ...jsdocConfig,
 } as const satisfies Partial<OxfmtConfig>;
