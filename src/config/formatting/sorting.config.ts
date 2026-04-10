@@ -44,11 +44,21 @@ export const sorting = {
       'workspace',
       'value-external',
       'type-import',
+
       { newlinesBetween: true },
+
       'lib-utils',
-      'types-constants',
-      ['value-internal', 'value-parent', 'value-sibling', 'value-index'],
+
       { newlinesBetween: true },
+
+      'types-constants',
+
+      { newlinesBetween: true },
+
+      ['value-internal', 'value-parent', 'value-sibling', 'value-index'],
+
+      { newlinesBetween: true },
+
       'styles',
       'unknown',
     ],
