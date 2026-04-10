@@ -38,26 +38,32 @@ export const sorting = {
         groupName: 'styles',
         elementNamePattern: ['styles/**', './styles/**', '*.css', '*.scss', '*.styles'],
       },
+      {
+        groupName: 'local-folders',
+        elementNamePattern: ['./*/**'],
+      },
+      {
+        groupName: 'local-files',
+        elementNamePattern: ['./[^/]+$'],
+      },
+      {
+        groupName: 'parent',
+        elementNamePattern: ['../**'],
+      },
     ],
     groups: [
       'value-builtin',
       'workspace',
       'value-external',
       'type-import',
-
       { newlinesBetween: true },
-
       'lib-utils',
       'types-constants',
-
-      { newlinesBetween: true },
-
+      // ['value-internal', 'value-parent', 'value-sibling', 'value-index'],
       'local-folders',
       'local-files',
       'parent',
-
       { newlinesBetween: true },
-
       'styles',
       'unknown',
     ],
