@@ -1,4 +1,5 @@
-import type { OxfmtConfig } from 'types/oxfmt.types';
+import type { OxfmtConfig } from 'oxfmt';
+
 import { jsdocConfig } from './jsdoc.config';
 
 export const base = {

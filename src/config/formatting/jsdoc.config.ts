@@ -1,4 +1,4 @@
-import type { OxfmtConfig } from 'types/oxfmt.types';
+import type { OxfmtConfig } from 'oxfmt';
 
 /**
  * JSDoc comment formatting preset for oxfmt.
