@@ -55,7 +55,8 @@ export const sorting = {
 
       { newlinesBetween: true },
 
-      'local-folders',
+      // ['value-internal', 'value-parent', 'value-sibling', 'value-index'],
+
       'local-files',
       'upstream',
 
