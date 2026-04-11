@@ -57,8 +57,6 @@ export const sorting = {
 
       ['value-internal', 'value-parent', 'value-sibling', 'value-index'],
 
-      'upstream',
-
       { newlinesBetween: true },
 
       'styles',
