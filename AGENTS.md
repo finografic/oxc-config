@@ -1,22 +1,5 @@
 # AGENTS.md - AI Assistant Guide
 
-## Rules - General
-
-Rules are canonical in `.github/instructions/` and shared across Claude Code, Cursor, and GitHub Copilot.
-Follow general TypeScript, ESLint, and naming conventions from prior context.
-
-- [General](/.github/instructions/00-general.instructions.md)
-- [File Naming](/.github/instructions/01-file-naming.instructions.md)
-- [TypeScript Patterns](/.github/instructions/02-typescript-patterns.instructions.md)
-- [Provider & Context Patterns](/.github/instructions/03-provider-context-patterns.instructions.md)
-- [ESLint & Code Style](/.github/instructions/04-eslint-code-style.instructions.md)
-- [Documentation](/.github/instructions/05-documentation.instructions.md)
-- [Modern TypeScript Patterns](/.github/instructions/06-modern-typescript-patterns.instructions.md)
-- [Variable Naming](/.github/instructions/07-variable-naming.instructions.md)
-- [README Standards](/.github/instructions/08-readme-standards.instructions.md)
-- [Picocolors CLI styling](/.github/instructions/09-picocolors-cli-styling.instructions.md)
-- [Git Policy](/.github/instructions/10-git-policy.instructions.md)
-
 ## Rules - Project-Specific
 
 Project-specific rules live in `.github/instructions/project/*.instructions.md`.
@@ -26,6 +9,24 @@ Project-specific rules live in `.github/instructions/project/*.instructions.md`.
 - **Source layout:** formatting presets in `src/config/formatting/`; ignore globs and agent instruction paths in `src/config/patterns/`; `SORTING_GROUP_*` and `SORT_PRESET_*` in `src/config/sorting-groups/`. Public API: `src/index.ts` → `dist/index.mjs`.
 - Root **`oxfmt.config.ts`** imports from `./dist/index.mjs` (rebuild with `pnpm build` after changing `src/`).
 - **Hooks:** `simple-git-hooks` pre-commit runs `lint-staged` then `oxfmt`; `lint-staged` runs ESLint before oxfmt on code and Markdown (see `package.json`).
+
+## Rules — Global
+
+Rules are canonical in `.github/instructions/` and shared across Claude Code, Cursor, and GitHub Copilot.
+Follow general TypeScript, ESLint, and naming conventions from prior context.
+
+- General: `.github/instructions/00-general.instructions.md`
+- File Naming: `.github/instructions/01-file-naming.instructions.md`
+- TypeScript: `.github/instructions/02-typescript-patterns.instructions.md`
+- ESLint & Style: `.github/instructions/04-eslint-code-style.instructions.md`
+- Documentation: `.github/instructions/05-documentation.instructions.md`
+- Modern TS Patterns: `.github/instructions/06-modern-typescript-patterns.instructions.md`
+- Variable Naming: `.github/instructions/07-variable-naming.instructions.md`
+- README Standards: `.github/instructions/08-readme-standards.instructions.md`
+- Picocolors CLI styling: `.github/instructions/09-picocolors-cli-styling.instructions.md`
+- Git Policy: `.github/instructions/10-git-policy.instructions.md`
+- Agent-facing Markdown: `.github/instructions/11-agent-facing-markdown.instructions.md`
+- Feature Design Specs: `.github/instructions/12-feature-design-specs.instructions.md`
 
 ## Rules - Markdown Tables
 
