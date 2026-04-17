@@ -106,7 +106,13 @@ export default defineConfig({
   },
   overrides: [
     {
-      files: ['oxlint.config.ts'],
+      files: ['tasks/e2e/test/*.test.ts'],
+      rules: {
+        'vitest/valid-title': ['off'],
+      },
+    },
+    {
+      files: ['oxlint.config.ts', 'oxfmt.config.ts', 'vitest.config.ts', 'vite.config.ts'],
       rules: {
         'import/no-default-export': 'off',
       },
