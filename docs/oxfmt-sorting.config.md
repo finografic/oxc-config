@@ -1,6 +1,6 @@
 # Oxfmt Configuration - Sorting
 
-<https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html#sortimports>
+[config-file-reference.html#sortimports](https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html#sortimports)
 
 ## sortImports
 

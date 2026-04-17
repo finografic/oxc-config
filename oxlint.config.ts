@@ -103,7 +103,7 @@ export default defineConfig({
     // ======================================================================== //
     // ======================================================================== //
 
-    curly: ['error', 'multi-line'],
+    'curly': ['error', 'multi-line'],
     'prefer-const': ['error', { destructuring: 'all' }],
     'prefer-destructuring': [
       'error',

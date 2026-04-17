@@ -1,6 +1,6 @@
 /**
- * Copies the oxfmt configuration schema from the installed package
- * into internal/schemas/ for offline reference and editor validation.
+ * Copies the oxfmt configuration schema from the installed package into internal/schemas/ for offline
+ * reference and editor validation.
  *
  * Run: pnpm update.schema
  */

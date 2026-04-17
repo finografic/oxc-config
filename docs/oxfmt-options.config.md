@@ -1,6 +1,6 @@
 # Oxfmt Configuration - Options
 
-<https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html>
+[config-file-reference](https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html)
 
 ## arrowParens
 

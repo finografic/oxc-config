@@ -2,7 +2,7 @@
 
 How to migrate your `@finografic` (or any) project to `@finografic/oxfmt-config` from dprint or Prettier.
 
-<https://github.com/finografic/oxfmt-config>
+[@finografic/oxfmt-config](https://github.com/finografic/oxfmt-config)
 
 ---
 
@@ -63,7 +63,7 @@ export default defineConfig({
 
 | Before (dprint)                  | After (oxfmt)                                                                                   |
 | -------------------------------- | ----------------------------------------------------------------------------------------------- |
-| `"format.check": "dprint check"` | `"format.check": "oxfmt --check"`                                                               |
+| `"format:check": "dprint check"` | `"format:check": "oxfmt --check"`                                                               |
 | `"format": "dprint fmt --diff"`  | `"format": "oxfmt"`                                                                             |
 | `"update.dprint-config": "..."`  | Remove (or replace with `"update.oxfmt-config": "pnpm add -D @finografic/oxfmt-config@latest"`) |
 
@@ -182,7 +182,7 @@ If oxfmt should be the sole owner of import sorting, use one of the `SORT_PRESET
 
 ### ESLint `@stylistic/indent` warnings after migration
 
-Oxfmt's JSX wrapping may produce indentation that differs from what `@stylistic/indent` expects. This typically shows up as warnings (not errors) in a small number of files. Fix with `pnpm lint.fix` or disable the rule if oxfmt is the formatting authority.
+Oxfmt's JSX wrapping may produce indentation that differs from what `@stylistic/indent` expects. This typically shows up as warnings (not errors) in a small number of files. Fix with `pnpm lint:fix` or disable the rule if oxfmt is the formatting authority.
 
 ### Lockfile regeneration
 

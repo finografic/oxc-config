@@ -8,8 +8,8 @@ Before releasing, ensure:
 
 - ✅ All changes committed and pushed
 - ✅ On `master` branch
-- ✅ Format check passing (`pnpm format.check`)
-- ✅ Tests passing (`pnpm test.run`)
+- ✅ Format check passing (`pnpm format:check`)
+- ✅ Tests passing (`pnpm test:run`)
 - ✅ Linting passing (`pnpm lint`)
 - ✅ Type-checking passing (`pnpm typecheck`)
 
@@ -20,7 +20,7 @@ Before releasing, ensure:
 Bug fixes and minor changes.
 
 ```bash
-pnpm release.github.patch
+pnpm release:github:patch
 ```
 
 ### Minor Release
@@ -28,7 +28,7 @@ pnpm release.github.patch
 New features, backward compatible.
 
 ```bash
-pnpm release.github.minor
+pnpm release:github:minor
 ```
 
 ### Major Release
@@ -36,14 +36,14 @@ pnpm release.github.minor
 Breaking changes.
 
 ```bash
-pnpm release.github.major
+pnpm release:github:major
 ```
 
 ## What Happens Automatically
 
 When you run a release command:
 
-1. **Local checks run** (`release.check`)
+1. **Local checks run** (`release:check`)
    - Format check (`oxfmt --check`)
    - Linting
    - Type checking
@@ -81,15 +81,15 @@ After releasing, verify:
 
 ## Manual Steps
 
-**⚠️ Important:** The `release.publish` command is only for manual recovery if the automated GitHub Actions workflow fails. It will check if the current version is already published and prevent duplicate publishes.
+**⚠️ Important:** The `release:publish` command is only for manual recovery if the automated GitHub Actions workflow fails. It will check if the current version is already published and prevent duplicate publishes.
 
 If the automated release fails, you can manually publish:
 
 ```bash
-pnpm release.publish
+pnpm release:publish
 ```
 
-**Note:** This command will fail if the version is already published. Use `release.github.patch/minor/major` to bump the version first.
+**Note:** This command will fail if the version is already published. Use `release:github:patch/minor/major` to bump the version first.
 
 ## Troubleshooting
 
@@ -102,14 +102,14 @@ If you see `npm error You cannot publish over the previously published versions:
 1. **Use the release scripts (recommended):** These automatically bump the version before publishing:
 
    ```bash
-   pnpm release.github.patch  # Bumps to next patch version
+   pnpm release:github:patch  # Bumps to next patch version
    ```
 
 2. **Manual publish (only if GitHub Actions failed):** If you need to republish the same version (e.g., after fixing a build issue), you'll need to:
    - Delete the existing tag (if it exists)
    - Manually publish (but this is rare and not recommended)
 
-**The release scripts (`release.github.patch/minor/major`) will never have this problem** because they bump the version before pushing.
+**The release scripts (`release:github:patch/minor/major`) will never have this problem** because they bump the version before pushing.
 
 ### Tag already exists
 
@@ -121,18 +121,18 @@ git tag -d v0.1.0
 git push origin :refs/tags/v0.1.0
 
 # Try again
-pnpm release.github.patch
+pnpm release:github:patch
 ```
 
-### release.check fails
+### release:check fails
 
 Run the checks manually to see what failed:
 
 ```bash
-pnpm format.check
-pnpm lint.fix
+pnpm format:check
+pnpm lint:fix
 pnpm typecheck
-pnpm test.run
+pnpm test:run
 ```
 
 ### Workflow fails

@@ -1,6 +1,6 @@
 # Oxfmt Configuration - Overrides
 
-<https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html#overrides>
+[config-file-reference.html#overrides](https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html#overrides)
 
 ## overrides
 

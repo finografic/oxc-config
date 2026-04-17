@@ -4,22 +4,18 @@
   "editor.formatOnSave": true,
   "editor.formatOnSaveMode": "file",
   "editor.defaultFormatter": "oxc.oxc-vscode",
-  // "editor.codeActionsOnSave": {
-  //   "source.fixAll.eslint": "explicit"
-  // },
   "editor.codeActionsOnSave": {
     "source.fixAll.oxc": "always"
   },
 
-  "eslint.enable": true,
-  "eslint.useFlatConfig": true,
-  "eslint.validate": ["javascript", "typescript", "css", "markdown"],
-
+  "eslint.enable": false,
   "prettier.enable": false,
   "oxc.typeAware": true,
-
   "typescript.tsdk": "node_modules/typescript/lib",
 
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
   "[javascript]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
@@ -29,16 +25,13 @@
   "[jsonc]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
-  "[typescript]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
-  },
-  "[markdown]": {
-    "editor.defaultFormatter": "oxc.oxc-vscode"
-  },
   "[yaml]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
   "[toml]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[markdown]": {
     "editor.defaultFormatter": "oxc.oxc-vscode"
   },
 
@@ -48,5 +41,6 @@
     "MD025": false, // Allow multiple top-level headings
     "MD041": false // Don't require first line to be a top-level heading
   },
-  "markdown.styles": [".vscode/markdown-github-light.css"]
+
+  "markdown.styles": ["node_modules/@finografic/md-lint/styles/markdown-github-light.css"]
 }
