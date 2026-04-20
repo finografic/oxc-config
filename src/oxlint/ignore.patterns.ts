@@ -12,4 +12,5 @@ export const lintIgnorePatterns = [
   '**/.cursor/hooks/**',
   '**/.cursor/chats/**',
   '**/.claude/**',
+  '**/.codex/**',
 ] as const;
