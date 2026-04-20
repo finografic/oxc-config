@@ -8,14 +8,18 @@ export const IGNORE_PATTERNS_LINT = [
   '**/coverage/**',
   '**/.astro/**/*.{ts,tsx,js,mjs}',
   '**/.turbo/**',
-  '*.d.ts',
+  '**/.astro/**',
   '**/*.min.*',
   '**/*.map',
+  '*.d.ts',
 
   // ── Agent tooling internals (NOT agent docs) ────────
   // We intentionally avoid blanket ignores like '**/.github/**'
   // or '**/.cursor/**' because agent instruction files live there.
   // Instead, ignore only the non-doc subdirectories.
+  '**/.ai/**',
+  '**/.cursor/hooks/**',
+  '**/.cursor/chats/**',
   '**/.claude/todos*',
   '**/.claude/settings*',
   '**/.github/workflows/**',

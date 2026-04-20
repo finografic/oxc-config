@@ -15,10 +15,32 @@ import type { DummyRuleMap } from 'oxlint';
  * - Rules with fixes available: 259
  */
 export const typescriptRules: DummyRuleMap = {
+  'typescript/await-thenable': 'error',
+  'typescript/consistent-indexed-object-style': ['error', 'record'],
   'typescript/consistent-type-imports': [
     'error',
     { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
   ],
+  'typescript/adjacent-overload-signatures': 'error',
+  'typescript/array-type': ['warn', { default: 'array-simple' }],
+  'typescript/ban-ts-comment': ['warn', { 'ts-expect-error': 'allow-with-description' }],
+  'typescript/consistent-type-assertions': 'error',
+  'typescript/consistent-type-definitions': ['error', 'interface'],
+  'typescript/explicit-function-return-type': [
+    'warn',
+    {
+      allowExpressions: true,
+      allowTypedFunctionExpressions: true,
+    },
+  ],
+  'typescript/no-array-constructor': 'error',
+  'typescript/no-require-imports': 'error',
+  'typescript/no-this-alias': 'error',
+  'typescript/prefer-as-const': 'error',
+  'typescript/prefer-for-of': 'error',
+  'typescript/prefer-function-type': 'error',
+  'typescript/unified-signatures': 'error',
+  'typescript/no-unsafe-type-assertion': 'off', // custom
   'typescript/no-unused-vars': [
     'error',
     {
@@ -32,28 +54,5 @@ export const typescriptRules: DummyRuleMap = {
     },
   ],
   'typescript/no-redeclare': 'warn',
-  'typescript/adjacent-overload-signatures': 'error',
-  'typescript/array-type': ['warn', { default: 'array-simple' }],
-  'typescript/ban-ts-comment': ['warn', { 'ts-expect-error': 'allow-with-description' }],
-  'typescript/consistent-type-assertions': 'error',
-  'typescript/consistent-type-definitions': ['error', 'interface'],
-  'typescript/no-array-constructor': 'error',
-  'typescript/no-require-imports': 'error',
-  'typescript/no-this-alias': 'error',
-  'typescript/prefer-as-const': 'error',
-  'typescript/prefer-for-of': 'error',
-  'typescript/prefer-function-type': 'error',
-  'typescript/unified-signatures': 'error',
-  'typescript/no-unsafe-type-assertion': 'off', // custom
   'typescript/no-floating-promises': 'off',
-  'typescript/await-thenable': 'error',
-  'typescript/consistent-indexed-object-style': ['error', 'record'],
-
-  'typescript/explicit-function-return-type': [
-    'warn',
-    {
-      allowExpressions: true,
-      allowTypedFunctionExpressions: true,
-    },
-  ],
 };
