@@ -1,5 +1,19 @@
 import type { DummyRuleMap } from 'oxlint';
 
+/**
+ * Base Oxlint rule overrides shared by this config package.
+ *
+ * References:
+ *
+ * - Full rules catalog: https://oxc.rs/docs/guide/usage/linter/rules.html#rules
+ * - Fixable-only filter: https://oxc.rs/docs/guide/usage/linter/rules.html?sort=name&dir=asc&has_fix=true#rules
+ *
+ * Metrics snapshot from docs at time of authoring:
+ *
+ * - Total rules: 720
+ * - Rules enabled by default: 109
+ * - Rules with fixes available: 259
+ */
 export const baseRules: DummyRuleMap = {
   'no-console': 'off',
 

@@ -38,9 +38,10 @@ export type {
 export { baseRules } from './oxlint/rules/base.rules';
 export { configOverrides } from './oxlint/rules/config.overrides';
 export { testOverrides } from './oxlint/rules/test.overrides';
-export { lintCategories } from './oxlint/categories';
+export { categories } from './oxlint/categories';
 export { lintIgnorePatterns } from './oxlint/ignore.patterns';
-export { lintOptions } from './oxlint/options';
+export { options } from './oxlint/options';
+export { env } from './oxlint/env';
 export { lintPlugins } from './oxlint/plugins';
 
 // ── shared patterns ───────────────────────────────────
