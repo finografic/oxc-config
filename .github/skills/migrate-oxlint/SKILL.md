@@ -191,7 +191,7 @@ Additional oxlint options:
 
 ## Step 6: Adopt the shared finografic config (optional)
 
-If this project is part of the finografic ecosystem, replace the generated `.oxlintrc.json` with a TypeScript config that imports composable pieces from `@finografic/oxc-config`:
+If this project is part of the finografic ecosystem, replace the generated `.oxlintrc.json` with a TypeScript config that imports composable pieces from `@finografic/oxc-config/oxlint` (or spreads `oxlintConfig` from `@finografic/oxc-config`):
 
 ```bash
 pnpm add -D @finografic/oxc-config
@@ -202,22 +202,25 @@ pnpm add -D @finografic/oxc-config
 import { defineConfig } from 'oxlint';
 import type { OxlintConfig } from 'oxlint';
 import {
-  baseRules,
+  categories,
   configOverrides,
-  lintCategories,
-  lintIgnorePatterns,
-  lintOptions,
-  lintPlugins,
+  env,
+  ignorePatterns,
+  loosenRules,
+  options,
+  plugins,
+  rules,
   testOverrides,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxlint';
 
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 

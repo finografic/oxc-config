@@ -17,9 +17,10 @@ pnpm add -D oxfmt
 pnpm add -D /path/to/finografic-oxc-config-<version>.tgz
 
 # 4. Create a consumer config file
-cat > .oxfmtrc.ts << 'EOF'
+cat > oxfmt.config.ts << 'EOF'
 import { defineConfig } from 'oxfmt';
-import { base, sorting, markdown, css } from '@finografic/oxc-config';
+import type { OxfmtConfig } from '@finografic/oxc-config/oxfmt';
+import { base, sorting, markdown, css } from '@finografic/oxc-config/oxfmt';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -30,7 +31,7 @@ export default defineConfig({
     { files: ['*.md', '*.mdx'], excludeFiles: [], options: { ...markdown } },
     { files: ['*.css', '*.scss'], excludeFiles: [], options: { ...css } },
   ],
-});
+} satisfies OxfmtConfig);
 EOF
 
 # 5. Create a test file to format
@@ -39,7 +40,7 @@ const   x=1
 const y = {a:1,b:2,c:3}
 import {useState} from 'react'
 import path from 'node:path'
-import {base} from '@finografic/oxc-config'
+import { base } from '@finografic/oxc-config/oxfmt';
 EOF
 
 # 6. Run oxfmt and check it picks up the config
@@ -53,7 +54,7 @@ cat test.ts
 
 # 7. Verify TypeScript resolves the types
 cat > check-types.ts << 'EOF'
-import { base, sorting, markdown, css, json, typescript } from '@finografic/oxc-config';
+import { base, sorting, markdown, css, json, typescript } from '@finografic/oxc-config/oxfmt';
 console.log(base.printWidth);      // should be 110
 console.log(markdown.printWidth);  // should be 110 (markdown preset)
 console.log(css.singleQuote);      // should be false

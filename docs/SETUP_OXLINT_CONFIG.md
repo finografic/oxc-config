@@ -1,22 +1,35 @@
 # Setting Up oxlint.config.ts
 
-A guide to configuring oxlint using the composable pieces exported from `@finografic/oxc-config`.
+A guide to configuring oxlint using the composable pieces exported from `@finografic/oxc-config/oxlint`, or the bundled `oxlintConfig` default from `@finografic/oxc-config`.
+
+---
+
+## Package entry points
+
+| Import from                     | Use when                                                                   |
+| ------------------------------- | -------------------------------------------------------------------------- |
+| `@finografic/oxc-config`        | You want `oxlintConfig` — spread into `defineConfig({ ...oxlintConfig })`. |
+| `@finografic/oxc-config/oxlint` | You want individual pieces (`plugins`, `rules`, overrides, …).             |
 
 ---
 
 ## How the config is structured
 
-| Export               | Source                                 | Purpose                                                  |
-| -------------------- | -------------------------------------- | -------------------------------------------------------- |
-| `lintPlugins`        | `src/oxlint/plugins.ts`                | Plugin list (eslint, typescript, unicorn, react, …)      |
-| `lintOptions`        | `src/oxlint/options.ts`                | `env` (builtin, node) + `options` (typeCheck, typeAware) |
-| `lintCategories`     | `src/oxlint/categories.ts`             | `{ correctness: 'error', perf: 'error' }`                |
-| `lintIgnorePatterns` | `src/oxlint/ignore.patterns.ts`        | Globs oxlint should skip (`*.d.ts`, `.astro/**`, …)      |
-| `baseRules`          | `src/oxlint/rules/base.rules.ts`       | Core TypeScript + import + ESLint rule set               |
-| `testOverrides`      | `src/oxlint/rules/test.overrides.ts`   | Relaxed rules for `*.spec.ts` / `*.test.ts` files        |
-| `configOverrides`    | `src/oxlint/rules/config.overrides.ts` | Allows default exports in config files                   |
+| Export            | Source                                     | Purpose                                                      |
+| ----------------- | ------------------------------------------ | ------------------------------------------------------------ |
+| `plugins`         | `src/oxlint/plugins.ts`                    | Plugin list (eslint, typescript, unicorn, react, …)          |
+| `env`             | `src/oxlint/env.ts`                        | Predefined globals (`builtin`, `node`, …)                    |
+| `options`         | `src/oxlint/options.ts`                    | `typeCheck`, `typeAware`, `reportUnusedDisableDirectives`, … |
+| `categories`      | `src/oxlint/categories.ts`                 | e.g. `{ correctness: 'error', perf: 'error', … }`            |
+| `ignorePatterns`  | `src/oxlint/ignore.patterns.ts`            | Globs oxlint should skip (`*.d.ts`, `.astro/**`, …)          |
+| `rules`           | `src/oxlint/rules/index.ts`                | Composed `baseRules` + `typescriptRules`                     |
+| `baseRules`       | `src/oxlint/rules/base.rules.ts`           | Core rule map (also merged into `rules`)                     |
+| `typescriptRules` | `src/oxlint/rules/typescript.rules.ts`     | TypeScript-oriented rules merged into `rules`                |
+| `loosenRules`     | `src/oxlint/rules/loosen.rules.ts`         | Small relaxations layered in the shipped default             |
+| `testOverrides`   | `src/oxlint/overrides/test.overrides.ts`   | Relaxed rules for `*.spec.ts` / `*.test.ts` files            |
+| `configOverrides` | `src/oxlint/overrides/config.overrides.ts` | Allows default exports in config entry files                 |
 
-All pieces are compiled to `dist/index.mjs` via `pnpm build` (tsdown).
+Granular pieces compile to `dist/oxlint.mjs` via `pnpm build` (tsdown). The package root re-exports `oxlintConfig` from `dist/index.mjs`.
 
 ---
 
@@ -28,6 +41,18 @@ Install the package and peer deps:
 pnpm add -D oxlint @finografic/oxc-config
 ```
 
+### Option A — bundled default
+
+```ts
+import { defineConfig } from 'oxlint';
+import type { OxlintConfig } from 'oxlint';
+import { oxlintConfig } from '@finografic/oxc-config';
+
+export default defineConfig({ ...oxlintConfig } satisfies OxlintConfig);
+```
+
+### Option B — composable pieces
+
 Create `oxlint.config.ts` at your project root:
 
 ```ts
@@ -35,22 +60,25 @@ import { defineConfig } from 'oxlint';
 import type { OxlintConfig } from 'oxlint';
 
 import {
-  baseRules,
+  categories,
   configOverrides,
-  lintCategories,
-  lintIgnorePatterns,
-  lintOptions,
-  lintPlugins,
+  env,
+  ignorePatterns,
+  loosenRules,
+  options,
+  plugins,
+  rules,
   testOverrides,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxlint';
 
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
@@ -62,15 +90,17 @@ export default defineConfig({
 
 ```ts
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
   rules: {
-    ...baseRules,
+    ...rules,
+    ...loosenRules,
     'unicorn/no-array-for-each': 'error',
   },
-  categories: { ...lintCategories },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
@@ -78,12 +108,13 @@ export default defineConfig({
 
 ```ts
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns, '**/generated/**'],
+  ignorePatterns: [...ignorePatterns, '**/generated/**'],
 } satisfies OxlintConfig);
 ```
 
@@ -98,12 +129,13 @@ const storybookOverrides: OxlintOverride = {
 };
 
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides, storybookOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
@@ -111,25 +143,25 @@ export default defineConfig({
 
 ```ts
 export default defineConfig({
-  plugins: [...lintPlugins],
-  env: { ...lintOptions.env },
+  plugins: [...plugins],
+  env,
   options: {
     typeCheck: false,
     typeAware: false,
     reportUnusedDisableDirectives: 'error',
   },
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
 ---
 
-## Understanding `lintOptions`
+## `env` and `options`
 
-`lintOptions` is a plain object that spreads two top-level keys into `defineConfig`:
+These are separate top-level fields on the oxlint config:
 
 ```ts
 {
@@ -144,23 +176,27 @@ export default defineConfig({
 
 - `env.builtin: true` — enables JavaScript built-in globals (`Promise`, `Map`, etc.)
 - `env.node: true` — enables Node.js globals (`process`, `__dirname`, etc.)
-- `options.typeCheck / typeAware` — enables `@typescript-eslint`-style rules that require a tsconfig
+- `options.typeCheck` / `typeAware` — enables `@typescript-eslint`-style rules that require a tsconfig
 
-For browser-only projects, override `env` after spreading:
+For browser-only projects, override `env`:
 
 ```ts
 export default defineConfig({
-  ...lintOptions,
+  plugins: [...plugins],
   env: { builtin: true, browser: true },
-  // ...
-});
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
+  overrides: [testOverrides, configOverrides],
+  ignorePatterns: [...ignorePatterns],
+} satisfies OxlintConfig);
 ```
 
 ---
 
 ## Type-aware linting with `oxlint-tsgolint`
 
-Some rules in `baseRules` (e.g. `typescript/await-thenable`, `typescript/no-floating-promises`) require type information. To enable them:
+Some rules in the composed `rules` map (e.g. `typescript/await-thenable`, `typescript/no-floating-promises`) require type information. To enable them:
 
 ```bash
 pnpm add -D oxlint-tsgolint
@@ -172,7 +208,7 @@ Then ensure your `tsconfig.json` is at the project root or pass `--tsconfig` to 
 
 ## Workflow
 
-Because `oxlint.config.ts` imports from `./dist/index.mjs`, **you must rebuild dist before changes to `src/` take effect**:
+Because `oxlint.config.ts` in this repo imports from `./dist/oxlint.mjs`, **you must rebuild dist before changes to `src/` take effect**:
 
 ```bash
 pnpm build   # rebuild dist
@@ -187,17 +223,29 @@ pnpm lint            # check all files
 pnpm lint:fix        # auto-fix where possible
 ```
 
+### Capturing resolved config (this repo)
+
+| Command                               | Output                                                                               |
+| ------------------------------------- | ------------------------------------------------------------------------------------ |
+| `pnpm oxlint:config:capture`          | `internal/configs/oxlint.config.json` + JSON on stdout (root config)                 |
+| `pnpm oxlint:config:capture:defaults` | `internal/configs/oxlint-defaults.config.json` (`scripts/oxlint-defaults.config.ts`) |
+
 ---
 
 ## File layout (this repo)
 
-| File                                   | Purpose                                     |
-| -------------------------------------- | ------------------------------------------- |
-| `src/oxlint/plugins.ts`                | `lintPlugins` array                         |
-| `src/oxlint/categories.ts`             | `lintCategories` object                     |
-| `src/oxlint/options.ts`                | `lintOptions` object (env + options)        |
-| `src/oxlint/ignore.patterns.ts`        | `lintIgnorePatterns` array                  |
-| `src/oxlint/rules/base.rules.ts`       | `baseRules` — core rule set (~60+ rules)    |
-| `src/oxlint/rules/test.overrides.ts`   | `testOverrides` — test file relaxations     |
-| `src/oxlint/rules/config.overrides.ts` | `configOverrides` — config file relaxations |
-| `src/oxlint/index.ts`                  | Barrel re-exporting all oxlint pieces       |
+| File                                       | Purpose                               |
+| ------------------------------------------ | ------------------------------------- |
+| `src/oxlint/plugins.ts`                    | `plugins` array                       |
+| `src/oxlint/categories.ts`                 | `categories` object                   |
+| `src/oxlint/env.ts`                        | `env` object                          |
+| `src/oxlint/options.ts`                    | `options` object                      |
+| `src/oxlint/ignore.patterns.ts`            | `ignorePatterns` array                |
+| `src/oxlint/rules/base.rules.ts`           | `baseRules` — core rule set           |
+| `src/oxlint/rules/typescript.rules.ts`     | `typescriptRules`                     |
+| `src/oxlint/rules/index.ts`                | Composed `rules` export               |
+| `src/oxlint/rules/loosen.rules.ts`         | `loosenRules`                         |
+| `src/oxlint/overrides/test.overrides.ts`   | `testOverrides`                       |
+| `src/oxlint/overrides/config.overrides.ts` | `configOverrides`                     |
+| `src/oxlint/default.config.ts`             | `oxlintConfig` for package root       |
+| `src/oxlint/index.ts`                      | Barrel re-exporting all oxlint pieces |

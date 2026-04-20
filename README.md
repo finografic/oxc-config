@@ -10,15 +10,43 @@ One install for both [**oxfmt**](https://oxc.rs/docs/guide/usage/formatter) and 
 pnpm add -D oxfmt oxlint @finografic/oxc-config
 ```
 
+### Package entry points
+
+| Import from                     | What you get                                                              |
+| ------------------------------- | ------------------------------------------------------------------------- |
+| `@finografic/oxc-config`        | `oxfmtConfig` and `oxlintConfig` — ready-to-spread defaults for each tool |
+| `@finografic/oxc-config/oxfmt`  | Granular formatter presets, sorting groups, types, `ignorePatterns`, …    |
+| `@finografic/oxc-config/oxlint` | Granular linter pieces (`plugins`, `rules`, `categories`, overrides, …)   |
+
+**Minimal consumer configs** (copy the finografic defaults verbatim):
+
+```ts
+// oxfmt.config.ts
+import { defineConfig } from 'oxfmt';
+import type { OxfmtConfig } from '@finografic/oxc-config/oxfmt';
+import { oxfmtConfig } from '@finografic/oxc-config';
+
+export default defineConfig({ ...oxfmtConfig } satisfies OxfmtConfig);
+```
+
+```ts
+// oxlint.config.ts
+import { defineConfig } from 'oxlint';
+import type { OxlintConfig } from 'oxlint';
+import { oxlintConfig } from '@finografic/oxc-config';
+
+export default defineConfig({ ...oxlintConfig } satisfies OxlintConfig);
+```
+
 ---
 
 ## oxfmt — Formatter
 
-### Minimal `oxfmt.config.ts`
+### Composable `oxfmt.config.ts`
 
 ```ts
 import { defineConfig } from 'oxfmt';
-import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config';
+import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config/oxfmt';
 import {
   AGENT_DOC_MARKDOWN_PATHS,
   agentMarkdown,
@@ -28,7 +56,7 @@ import {
   json,
   markdown,
   sorting,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxfmt';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -112,7 +140,7 @@ See [docs/OXFMT_SORT_GROUPS.md](./docs/OXFMT_SORT_GROUPS.md) for the full groups
 
 ```ts
 import { defineConfig } from 'oxfmt';
-import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config';
+import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config/oxfmt';
 import {
   AGENT_DOC_MARKDOWN_PATHS,
   SORT_PRESET_CLIENT,
@@ -133,7 +161,7 @@ import {
   markdown,
   sorting,
   typescript,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxfmt';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -176,7 +204,7 @@ export default defineConfig({
 
 ```ts
 import { defineConfig } from 'oxfmt';
-import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config';
+import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config/oxfmt';
 import {
   AGENT_DOC_MARKDOWN_PATHS,
   SORT_PRESET_SERVER,
@@ -194,7 +222,7 @@ import {
   markdown,
   sorting,
   typescript,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxfmt';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -233,44 +261,49 @@ export default defineConfig({
 
 ## oxlint — Linter
 
-### Minimal `oxlint.config.ts`
+### Composable `oxlint.config.ts`
 
 ```ts
 import { defineConfig } from 'oxlint';
 import type { OxlintConfig } from 'oxlint';
 import {
-  baseRules,
+  categories,
   configOverrides,
-  lintCategories,
-  lintIgnorePatterns,
-  lintOptions,
-  lintPlugins,
+  env,
+  ignorePatterns,
+  loosenRules,
+  options,
+  plugins,
+  rules,
   testOverrides,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxlint';
 
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
-### Exported pieces
+### Exported pieces (`@finografic/oxc-config/oxlint`)
 
-| Export               | Type             | Purpose                                                   |
-| -------------------- | ---------------- | --------------------------------------------------------- |
-| `lintPlugins`        | `string[]`       | Plugin list (eslint, typescript, unicorn, react, …)       |
-| `lintOptions`        | Config fragment  | Spreads `env` (builtin, node) + `options` (typeCheck, …)  |
-| `lintCategories`     | Config fragment  | `{ correctness: 'error', perf: 'error' }`                 |
-| `lintIgnorePatterns` | `string[]`       | Ignore globs: `*.d.ts`, `.astro/**`, `.claude/**`, …      |
-| `baseRules`          | `DummyRuleMap`   | Core TypeScript + import + ESLint rule set (~60 rules)    |
-| `testOverrides`      | `OxlintOverride` | Relaxed rules for `*.spec.ts` / `*.test.ts` files         |
-| `configOverrides`    | `OxlintOverride` | Allows default exports in `oxlint/oxfmt/vitest.config.ts` |
-
-`lintOptions` spreads two top-level keys: `env: { builtin: true, node: true }` and `options: { typeCheck: true, typeAware: true, reportUnusedDisableDirectives: 'error' }`.
+| Export            | Type             | Purpose                                                             |
+| ----------------- | ---------------- | ------------------------------------------------------------------- |
+| `plugins`         | `string[]`       | Plugin list (eslint, typescript, unicorn, react, …)                 |
+| `env`             | `OxlintEnv`      | Globals (`builtin`, `node`, …)                                      |
+| `options`         | object           | `typeCheck`, `typeAware`, `reportUnusedDisableDirectives`, …        |
+| `categories`      | object           | e.g. `{ correctness: 'error', perf: 'error', suspicious: 'warn' }`  |
+| `ignorePatterns`  | `string[]`       | Ignore globs: `*.d.ts`, `.astro/**`, `.claude/**`, …                |
+| `rules`           | `DummyRuleMap`   | Composed base + TypeScript rule set                                 |
+| `baseRules`       | `DummyRuleMap`   | Subset used inside `rules` (re-exported if you need to cherry-pick) |
+| `typescriptRules` | `DummyRuleMap`   | TypeScript-specific rules merged into `rules`                       |
+| `loosenRules`     | `DummyRuleMap`   | Small relaxations layered on top of `rules` in the shipped default  |
+| `testOverrides`   | `OxlintOverride` | Relaxed rules for `*.spec.ts` / `*.test.ts` files                   |
+| `configOverrides` | `OxlintOverride` | Allows default exports in config entry files                        |
 
 ### Composition patterns
 
@@ -278,7 +311,8 @@ export default defineConfig({
 
 ```ts
 rules: {
-  ...baseRules,
+  ...rules,
+  ...loosenRules,
   'unicorn/no-array-for-each': 'error',
 },
 ```
@@ -286,7 +320,7 @@ rules: {
 **Extend ignore patterns:**
 
 ```ts
-ignorePatterns: [...lintIgnorePatterns, '**/generated/**'],
+ignorePatterns: [...ignorePatterns, '**/generated/**'],
 ```
 
 **Add a custom override:**
@@ -306,29 +340,33 @@ overrides: [testOverrides, configOverrides, storybookOverrides],
 
 ```ts
 export default defineConfig({
-  ...lintOptions,
-  env: { builtin: true, browser: true }, // replaces node: true
-  // ...
-});
+  plugins: [...plugins],
+  env: { builtin: true, browser: true },
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
+  overrides: [testOverrides, configOverrides],
+  ignorePatterns: [...ignorePatterns],
+} satisfies OxlintConfig);
 ```
 
 **Disable type-aware rules (faster CI, no tsconfig required):**
 
 ```ts
 export default defineConfig({
-  plugins: [...lintPlugins],
-  env: { ...lintOptions.env },
+  plugins: [...plugins],
+  env,
   options: { typeCheck: false, typeAware: false, reportUnusedDisableDirectives: 'error' },
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
 ### Type-aware linting
 
-Some rules in `baseRules` (e.g. `typescript/await-thenable`) require type information. Install `oxlint-tsgolint` and ensure `tsconfig.json` is at the project root:
+Some rules in the composed `rules` map (e.g. `typescript/await-thenable`) require type information. Install `oxlint-tsgolint` and ensure `tsconfig.json` is at the project root:
 
 ```bash
 pnpm add -D oxlint-tsgolint
@@ -340,16 +378,29 @@ See [docs/SETUP_OXLINT_CONFIG.md](./docs/SETUP_OXLINT_CONFIG.md) for the full co
 
 ## Source layout
 
-| Area                              | Path                                                                            |
-| --------------------------------- | ------------------------------------------------------------------------------- |
-| Formatting presets                | `src/oxfmt/formatting/` (`base`, `css`, `html`, `json`, `markdown`, `react`, …) |
-| Sorting groups + presets          | `src/oxfmt/sorting-groups/` (`*.groups.ts`, `presets.ts`)                       |
-| Types                             | `src/oxfmt/types/` (`oxfmt.types.ts`, `sorting.types.ts`)                       |
-| Linting pieces                    | `src/oxlint/` (`plugins.ts`, `categories.ts`, `options.ts`, `rules/`, …)        |
-| Shared ignore globs + agent paths | `src/patterns/` (`ignore.patterns.ts`, `agent-docs.patterns.ts`)                |
-| Public API                        | `src/index.ts` → `dist/index.mjs`                                               |
+| Area                             | Path                                                                                   |
+| -------------------------------- | -------------------------------------------------------------------------------------- |
+| Formatting presets               | `src/oxfmt/formatting/` (`base`, `css`, `html`, `json`, `markdown`, `react`, …)        |
+| Sorting groups + presets         | `src/oxfmt/sorting-groups/` (`*.groups.ts`, `presets.ts`)                              |
+| Types                            | `src/oxfmt/types/` (`oxfmt.types.ts`, `sorting.types.ts`)                              |
+| Linting pieces                   | `src/oxlint/` (`plugins.ts`, `categories.ts`, `options.ts`, `rules/`, `overrides/`, …) |
+| Formatter / agent ignore helpers | `src/oxfmt/ignore.patterns.ts`, `src/oxfmt/ignore-agents.patterns.ts`                  |
+| Oxlint ignore globs              | `src/oxlint/ignore.patterns.ts`                                                        |
+| Bundled defaults (package root)  | `src/oxfmt/default.config.ts`, `src/oxlint/default.config.ts` → `dist/index.mjs`       |
+| Granular exports                 | `src/oxfmt/index.ts` → `dist/oxfmt.mjs`, `src/oxlint/index.ts` → `dist/oxlint.mjs`     |
 
-Both `oxfmt.config.ts` and `oxlint.config.ts` import from `./dist/index.mjs`. Rebuild with `pnpm build` after editing `src/`.
+Root `oxfmt.config.ts` and `oxlint.config.ts` import from `./dist/oxfmt.mjs` and `./dist/oxlint.mjs`. Rebuild with `pnpm build` (or `pnpm dev`) after editing `src/`.
+
+## Maintaining this repository
+
+| Command                               | Purpose                                                                                                               |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------- |
+| `pnpm build` / `pnpm dev`             | Compile `src/` to `dist/` (required before root configs pick up oxlint/oxfmt source changes).                         |
+| `pnpm schemas:update`                 | Refresh `internal/schemas/*.schema.json` from installed `oxfmt` / `oxlint` packages.                                  |
+| `pnpm oxlint:config:capture`          | Run `oxlint --print-config` on root `oxlint.config.ts`; writes `internal/configs/oxlint.config.json` and prints JSON. |
+| `pnpm oxlint:config:capture:defaults` | Same for `scripts/oxlint-defaults.config.ts` → `internal/configs/oxlint-defaults.config.json`.                        |
+
+Published npm artifacts include `internal/schemas` for editor `$schema` hints; `internal/configs` snapshots are development-only (not in the `"files"` list).
 
 ## lint-staged
 

@@ -15,7 +15,7 @@ This package exposes `SORTING_GROUP_*` constants and `SORT_PRESET_*` arrays so c
 | Presets          | `src/oxfmt/sorting-groups/presets.ts`       | `SORT_PRESET_CLIENT`, `SORT_PRESET_SERVER`, `SORT_PRESET_CLI`, `SORT_PRESET_LIBRARY` |
 | Base preset      | `src/oxfmt/formatting/sorting.config.ts`    | Default `sorting` spread (workspace + lib-utils + types-constants + styles only)     |
 
-Barrel: `src/oxfmt/sorting-groups/index.ts`. Public re-exports: `src/index.ts`.
+Barrel: `src/oxfmt/sorting-groups/index.ts`. Public re-exports: `src/oxfmt/index.ts` → `@finografic/oxc-config/oxfmt`.
 
 ---
 
@@ -38,8 +38,8 @@ Presets are ordered arrays you can spread into `sortImports.customGroups`. Pair 
 
 ```ts
 import { defineConfig } from 'oxfmt';
-import type { OxfmtConfig } from '@finografic/oxc-config';
-import { SORT_PRESET_CLIENT, base, ignorePatterns, sorting } from '@finografic/oxc-config';
+import type { OxfmtConfig } from '@finografic/oxc-config/oxfmt';
+import { SORT_PRESET_CLIENT, base, ignorePatterns, sorting } from '@finografic/oxc-config/oxfmt';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -84,8 +84,8 @@ Oxfmt matches `elementNamePattern` globs against **import source strings**. Rela
 ## Consumer migration (breaking rename)
 
 ```diff
-- import { SORTING_GROUP_HOOKS_ROUTES } from '@finografic/oxc-config';
-+ import { SORTING_GROUP_HOOKS, SORTING_GROUP_CLIENT_ROUTES } from '@finografic/oxc-config';
+- import { SORTING_GROUP_HOOKS_ROUTES } from '@finografic/oxc-config/oxfmt';
++ import { SORTING_GROUP_HOOKS, SORTING_GROUP_CLIENT_ROUTES } from '@finografic/oxc-config/oxfmt';
 ```
 
 ```diff

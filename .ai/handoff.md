@@ -14,30 +14,28 @@
 
 Pure ESM TypeScript library — no runtime code, only exported plain objects (config presets + rule maps). Consumers install the package and spread presets/rules into their own `oxfmt.config.ts` / `oxlint.config.ts`. No `extends` mechanism — composition is via JS object spread.
 
-Build tool: `tsdown` compiles `src/index.ts` → `dist/index.mjs` + `dist/index.d.mts`. Both root config files (`oxfmt.config.ts`, `oxlint.config.ts`) import from `./dist/index.mjs`.
+Build tool: `tsdown` compiles three entries: `src/index.ts` → `dist/index.mjs` (exports `oxfmtConfig` + `oxlintConfig` only), `src/oxfmt/index.ts` → `dist/oxfmt.mjs`, `src/oxlint/index.ts` → `dist/oxlint.mjs`. Root `oxfmt.config.ts` imports `./dist/oxfmt.mjs`; root `oxlint.config.ts` imports `./dist/oxlint.mjs`.
 
 ```
 src/
-  index.ts                       ← public barrel (all namespaces)
+  index.ts                       ← oxfmtConfig + oxlintConfig only
   oxfmt/
     formatting/                  ← base, css, html, json, jsdoc, markdown, react, sorting, typescript
     sorting-groups/              ← SORTING_GROUP_*, SORT_PRESET_*
     types/                       ← OxfmtConfig, OxfmtCssConfig, SortImportsConfig, etc.
-    index.ts
+    ignore.patterns.ts           ← formatter ignorePatterns
+    ignore-agents.patterns.ts    ← AGENT_DOC_* , agentMarkdown
+    default.config.ts            ← oxfmtConfig object
+    index.ts                     ← granular oxfmt public API
   oxlint/
-    plugins.ts                   ← lintPlugins
-    categories.ts                ← lintCategories
-    options.ts                   ← lintOptions (env + options)
-    ignore.patterns.ts           ← lintIgnorePatterns
-    rules/
-      base.rules.ts              ← baseRules (DummyRuleMap — ~60 rules)
-      test.overrides.ts          ← testOverrides (OxlintOverride)
-      config.overrides.ts        ← configOverrides (OxlintOverride)
-    index.ts
-  patterns/
-    ignore.patterns.ts           ← ignorePatterns (oxfmt-focused)
-    agent-docs.patterns.ts       ← AGENT_DOC_PATHS, AGENT_DOC_MARKDOWN_PATHS, agentMarkdown
-    index.ts
+    plugins.ts                   ← plugins
+    categories.ts                ← categories
+    env.ts / options.ts          ← env + options (separate top-level config keys)
+    ignore.patterns.ts           ← ignorePatterns (oxlint)
+    rules/                       ← baseRules, typescriptRules, composed rules, loosenRules
+    overrides/                   ← testOverrides, configOverrides
+    default.config.ts            ← oxlintConfig object
+    index.ts                     ← granular oxlint public API
 dist/                            ← compiled output (gitignored)
 ```
 
@@ -76,18 +74,20 @@ pnpm lint:fix        # oxlint --fix
 pnpm format:check    # oxfmt --check
 pnpm format          # oxfmt
 pnpm check           # format:check + lint + typecheck + test:run
+pnpm schemas:update  # internal/schemas/*.schema.json from node_modules
+pnpm oxlint:config:capture / :capture:defaults  # internal/configs snapshots
 pnpm release:github:patch/minor/major
 ```
 
 ## Decisions
 
 1. Merge oxfmt + oxlint config into one package `@finografic/oxc-config` v2.0.0. (2026-04-20)
-2. Source layout: `src/oxfmt/`, `src/oxlint/`, `src/patterns/` — named by content, not structure. (2026-04-20)
+2. Source layout: `src/oxfmt/` (includes formatter ignores + agent path helpers), `src/oxlint/`, top-level `src/index.ts` for bundled defaults. (2026-04-20)
 3. `html` and `react` presets renamed from `htmlConfig`/`reactConfig` and now publicly exported. (2026-04-20)
-4. `lintIgnorePatterns` added as an explicit export (not in original roadmap). (2026-04-20)
+4. Oxlint exports `ignorePatterns` from `src/oxlint/ignore.patterns.ts` (distinct from oxfmt formatter ignores). (2026-04-20)
 5. `baseRules` typed as `DummyRuleMap`; overrides typed as `OxlintOverride` — literal types must match at definition time to survive TypeScript spread checks. (2026-04-20)
 6. Bug fix: old `oxlint.config.ts` had `files: '**/*.spec.ts,**/*.test.ts,...'` (comma-separated string) — corrected to array in `testOverrides`. (2026-04-20)
-7. `lintOptions` = `{ env: {...}, options: {...} }` — spreads both at the top level of defineConfig. (2026-04-20)
+7. Oxlint config passes `env` and `options` as separate fields (both exported from `@finografic/oxc-config/oxlint`). (2026-04-20)
 8. `MIGRATION_GUIDE.md` moved to `docs/MIGRATION_GUIDE.md`. (2026-04-20)
 9. Use `OmitIndexSignature` from type-fest on oxfmt types. (2026-03-18)
 10. Cache schema in `internal/schemas/oxfmt.schema.json`. (2026-03-18)

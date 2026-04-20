@@ -16,9 +16,13 @@ pnpm test          # Watch mode for testing
 ### Code Quality
 
 ```bash
-pnpm lint          # Check code style
-pnpm lint:fix      # Auto-fix issues
-pnpm typecheck     # Type check without building
+pnpm lint          # oxlint (repo root config)
+pnpm lint:fix      # oxlint --fix
+pnpm typecheck     # TypeScript --noEmit
+pnpm build         # tsdown → dist/ (needed after src/ changes for root configs)
+pnpm schemas:update        # refresh internal/schemas from node_modules
+pnpm oxlint:config:capture # snapshot resolved root oxlint → internal/configs/
+pnpm oxlint:config:capture:defaults # snapshot defaults config
 ```
 
 ---
@@ -35,7 +39,7 @@ git commit -m "feat: add new feature"
 **Automatic hooks run:**
 
 1. ✅ **pre-commit hook** triggers
-   - Runs `npx lint-staged --allow-empty` (ESLint + oxfmt on staged globs)
+   - Runs `npx lint-staged --allow-empty` (oxlint + oxfmt on staged globs; md-lint on markdown)
    - Runs `oxfmt --no-error-on-unmatched-pattern` on the repo
    - Fast (roughly seconds to a minute depending on tree size)
 
@@ -87,25 +91,16 @@ pnpm release:github:patch  # or .minor or .major
 
 ### package.json Scripts
 
-```json
-{
-  "scripts": {
-    // Development
-    "dev": "tsdown --watch",
-    "test": "vitest", // Watch mode
-    "test:run": "vitest run", // Run once (CI/releases)
+See `package.json` in the repo root for the canonical script list. Highlights:
 
-    // Quality checks
-    "lint": "eslint .",
-    "lint:fix": "eslint . --fix",
-    "typecheck": "tsc --project tsconfig.json --noEmit",
-
-    // Releases
-    "release:github:patch": "pnpm run release:check && pnpm version patch && git push --follow-tags",
-    "release:check": "pnpm format:check && pnpm lint:fix && pnpm typecheck && pnpm test:run"
-  }
-}
-```
+- **`pnpm dev`** — `tsdown --watch`
+- **`pnpm test` / `pnpm test:run`** — Vitest (watch vs single run)
+- **`pnpm lint` / `pnpm lint:fix`** — oxlint with root `oxlint.config.ts`
+- **`pnpm format` / `pnpm format:check`** — oxfmt with root `oxfmt.config.ts`
+- **`pnpm typecheck`** — `tsc --noEmit`
+- **`pnpm schemas:update`** — copy oxfmt/oxlint JSON schemas into `internal/schemas/`
+- **`pnpm oxlint:config:capture`** — write resolved oxlint JSON to `internal/configs/oxlint.config.json`
+- **`pnpm release:check`** — format, lint fix, typecheck, tests before version bump
 
 ### .simple-git-hooks.mjs
 
@@ -128,8 +123,11 @@ export default {
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": ["eslint --fix", "oxfmt --no-error-on-unmatched-pattern"],
-    "*.md": ["eslint --fix", "oxfmt --no-error-on-unmatched-pattern"],
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "oxfmt --no-error-on-unmatched-pattern",
+      "oxlint -c oxlint.config.ts --fix --no-error-on-unmatched-pattern"
+    ],
+    "*.md": ["oxfmt --no-error-on-unmatched-pattern", "md-lint --fix"],
     "*.{json,jsonc,yml,yaml,toml}": ["oxfmt --no-error-on-unmatched-pattern"]
   }
 }
@@ -137,7 +135,7 @@ export default {
 
 **Key points:**
 
-- ✅ ESLint runs before oxfmt on TS/JS and Markdown
+- ✅ oxlint runs (with fix) on staged TS/JS; oxfmt runs on code, markdown, and data files
 - ✅ Runs on staged files only (`--allow-empty` avoids failure when no files match)
 - ✅ Auto-fixes when possible; blocks commit if errors remain
 
@@ -178,7 +176,7 @@ The following hooks are created in `.git/hooks/`:
 npx lint-staged --allow-empty && oxfmt --no-error-on-unmatched-pattern
 ```
 
-**Purpose:** Lint and format staged files, then run oxfmt on the working tree  
+**Purpose:** Lint-staged (oxlint + oxfmt + md-lint on matching globs), then full-tree oxfmt  
 **Speed:** Dominated by full-tree oxfmt on large repos  
 **Blocking:** Yes (commit fails if a step fails)
 

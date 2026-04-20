@@ -26,50 +26,56 @@ pnpm add -D oxlint
 
 ```diff
 - import { base, css, json, markdown, sorting, ignorePatterns } from '@finografic/oxfmt-config';
-+ import { base, css, json, markdown, sorting, ignorePatterns } from '@finografic/oxc-config';
++ import { base, css, json, markdown, sorting, ignorePatterns } from '@finografic/oxc-config/oxfmt';
 ```
 
-All existing export names (`base`, `css`, `json`, `markdown`, `sorting`, `typescript`, `ignorePatterns`, `SORTING_GROUP_*`, `SORT_PRESET_*`, `AGENT_DOC_PATHS`, `agentMarkdown`, …) are unchanged. No other changes needed to your `oxfmt.config.ts`.
+Granular formatter exports live under the **`@finografic/oxc-config/oxfmt`** subpath. The package root also exposes **`oxfmtConfig`** if you prefer a single spreadable object.
 
 ### 3. New exports (additive — no breaking changes)
 
-| Export               | Type             | Purpose                                               |
-| -------------------- | ---------------- | ----------------------------------------------------- |
-| `html`               | Preset           | HTML formatting options (previously unexported)       |
-| `react`              | Preset           | JSX/React formatting options (previously unexported)  |
-| `jsdoc`              | Preset           | JSDoc formatting block (already spread inside `base`) |
-| `lintPlugins`        | `string[]`       | Oxlint plugin list                                    |
-| `lintOptions`        | Config fragment  | `env` + `options` block for oxlint                    |
-| `lintCategories`     | Config fragment  | `{ correctness: 'error', perf: 'error' }`             |
-| `lintIgnorePatterns` | `string[]`       | Oxlint-specific ignore globs                          |
-| `baseRules`          | `DummyRuleMap`   | Core rule set for oxlint                              |
-| `testOverrides`      | `OxlintOverride` | Relaxed rules for test files                          |
-| `configOverrides`    | `OxlintOverride` | Allows default exports in config files                |
+| Export                         | Type             | Purpose                                               |
+| ------------------------------ | ---------------- | ----------------------------------------------------- |
+| `html`                         | Preset           | HTML formatting options (previously unexported)       |
+| `react`                        | Preset           | JSX/React formatting options (previously unexported)  |
+| `jsdoc`                        | Preset           | JSDoc formatting block (already spread inside `base`) |
+| `oxfmtConfig`                  | object           | Ready-to-spread default oxfmt config (package root)   |
+| `oxlintConfig`                 | object           | Ready-to-spread default oxlint config (package root)  |
+| `plugins`                      | `string[]`       | Oxlint plugin list (`@finografic/oxc-config/oxlint`)  |
+| `env`, `options`               | objects          | Oxlint environment and tooling options                |
+| `categories`                   | object           | Category severities                                   |
+| `ignorePatterns`               | `string[]`       | Oxlint-specific ignore globs                          |
+| `rules`, `loosenRules`         | maps             | Composed rule set for oxlint                          |
+| `baseRules`, `typescriptRules` | maps             | Lower-level rule maps merged into `rules`             |
+| `testOverrides`                | `OxlintOverride` | Relaxed rules for test files                          |
+| `configOverrides`              | `OxlintOverride` | Allows default exports in config files                |
 
 ### 4. Migrate your oxlint config to use shared pieces (optional)
 
-If you have an `oxlint.config.ts` in your project, you can now use the shared pieces:
+If you have an `oxlint.config.ts` in your project, import from **`@finografic/oxc-config/oxlint`** (or spread **`oxlintConfig`** from `@finografic/oxc-config`):
 
 ```ts
 import { defineConfig } from 'oxlint';
 import type { OxlintConfig } from 'oxlint';
 import {
-  baseRules,
+  categories,
   configOverrides,
-  lintCategories,
-  lintIgnorePatterns,
-  lintOptions,
-  lintPlugins,
+  env,
+  ignorePatterns,
+  loosenRules,
+  options,
+  plugins,
+  rules,
   testOverrides,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxlint';
 
 export default defineConfig({
-  plugins: [...lintPlugins],
-  ...lintOptions,
-  rules: { ...baseRules },
-  categories: { ...lintCategories },
+  plugins: [...plugins],
+  env,
+  options,
+  categories,
+  rules: { ...rules, ...loosenRules },
   overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...lintIgnorePatterns],
+  ignorePatterns: [...ignorePatterns],
 } satisfies OxlintConfig);
 ```
 
@@ -95,6 +101,7 @@ At the workspace root:
 
 ```ts
 import { defineConfig } from 'oxfmt';
+import type { OxfmtConfig, OxfmtOverrideConfig } from '@finografic/oxc-config/oxfmt';
 import {
   agentMarkdown,
   AGENT_DOC_MARKDOWN_PATHS,
@@ -104,7 +111,7 @@ import {
   json,
   markdown,
   sorting,
-} from '@finografic/oxc-config';
+} from '@finografic/oxc-config/oxfmt';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -124,8 +131,8 @@ export default defineConfig({
       options: { ...agentMarkdown },
     },
     { files: ['*.css', '*.scss'], excludeFiles: [], options: { ...css } },
-  ],
-} satisfies ReturnType<typeof defineConfig>);
+  ] satisfies OxfmtOverrideConfig[],
+} satisfies OxfmtConfig);
 ```
 
 ### 3. Update `package.json` scripts
@@ -138,17 +145,20 @@ export default defineConfig({
 
 ### 4. Update lint-staged
 
+If you use oxlint for JS/TS, align with this package’s pattern (oxfmt before oxlint on staged code; see the root `package.json` in `@finografic/oxc-config` for a full example):
+
 ```json
 {
   "lint-staged": {
-    "*.{ts,tsx,js,jsx,mjs,cjs}": ["eslint --fix", "oxfmt --no-error-on-unmatched-pattern"],
-    "*.md": ["eslint --fix", "oxfmt --no-error-on-unmatched-pattern"],
+    "*.{ts,tsx,js,jsx,mjs,cjs}": [
+      "oxfmt --no-error-on-unmatched-pattern",
+      "oxlint -c oxlint.config.ts --fix --no-error-on-unmatched-pattern"
+    ],
+    "*.md": ["oxfmt --no-error-on-unmatched-pattern", "md-lint --fix"],
     "*.{json,jsonc,yml,yaml,toml}": ["oxfmt --no-error-on-unmatched-pattern"]
   }
 }
 ```
-
-Run ESLint **first**, then oxfmt — so formatting always has final say.
 
 ### 5. Update git hooks
 
@@ -226,7 +236,7 @@ If your project uses ESLint `simple-import-sort` as the source of truth for impo
 
 ```diff
 - import { SORTING_GROUP_HOOKS_ROUTES } from '@finografic/oxfmt-config';
-+ import { SORTING_GROUP_HOOKS, SORTING_GROUP_CLIENT_ROUTES } from '@finografic/oxc-config';
++ import { SORTING_GROUP_HOOKS, SORTING_GROUP_CLIENT_ROUTES } from '@finografic/oxc-config/oxfmt';
 ```
 
 ---

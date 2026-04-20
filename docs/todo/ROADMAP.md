@@ -1,5 +1,7 @@
 # Roadmap: Rename & Expand to `@finografic/oxc-config`
 
+> **Note:** This document is largely a historical plan. The shipped package uses **`dist/index.mjs`** for `oxfmtConfig` / `oxlintConfig` only, plus **`dist/oxfmt.mjs`** and **`dist/oxlint.mjs`** for granular imports. Pattern helpers live under **`src/oxfmt/`** (not `src/patterns/`).
+
 ## Decision
 
 Merge `@finografic/oxfmt-config` (formatter) and the local `oxlint.config.ts` (linter) into a
@@ -7,7 +9,7 @@ single published package: **`@finografic/oxc-config`**.
 
 - Single install, single version, one entry in the generator
 - Both tools are oxc siblings — shared ignore patterns and agent doc paths apply to both
-- No monorepo — still one package, one `dist/index.mjs`
+- No monorepo — still one package; build emits `dist/index.mjs` plus `dist/oxfmt.mjs` / `dist/oxlint.mjs`
 
 ---
 

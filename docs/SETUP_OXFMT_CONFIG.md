@@ -9,11 +9,11 @@ A guide to configuring oxfmt in this repo, including a critical gotcha that caus
 | Export / area                                              | Source                                | Purpose                                            |
 | ---------------------------------------------------------- | ------------------------------------- | -------------------------------------------------- |
 | `base`, `typescript`, `json`, `markdown`, `css`, `sorting` | `src/oxfmt/formatting/`               | Named formatting and sort presets                  |
-| `ignorePatterns`                                           | `src/patterns/ignore.patterns.ts`     | Globs to exclude from formatting                   |
-| `AGENT_DOC_*`, `agentMarkdown`                             | `src/patterns/agent-docs.patterns.ts` | Agent instruction paths + relaxed markdown options |
+| `ignorePatterns`                                           | `src/oxfmt/ignore.patterns.ts`        | Globs to exclude from formatting                   |
+| `AGENT_DOC_*`, `agentMarkdown`                             | `src/oxfmt/ignore-agents.patterns.ts` | Agent instruction paths + relaxed markdown options |
 | `SORTING_GROUP_*`, `SORT_PRESET_*`                         | `src/oxfmt/sorting-groups/`           | Composable import-sort groups                      |
 
-These are compiled to `dist/index.mjs` via `pnpm build` (tsdown). The root `oxfmt.config.ts` imports from the compiled dist — not from source — so TypeScript path aliases in `src/` do not affect the formatter binary.
+These are compiled to `dist/oxfmt.mjs` via `pnpm build` (tsdown). The root `oxfmt.config.ts` imports from the compiled dist — not from source — so TypeScript path aliases in `src/` do not affect the formatter binary.
 
 > **Package rename:** In v2.0.0 the package was renamed from `@finografic/oxfmt-config` to `@finografic/oxc-config`. Update your install command and import paths accordingly.
 
@@ -47,7 +47,7 @@ Files format with oxfmt defaults instead of your configured values — even thou
 
 ```ts
 import { defineConfig } from 'oxfmt';
-import { base, sorting, markdown, json, css, ignorePatterns } from './dist/index.mjs';
+import { base, sorting, markdown, json, css, ignorePatterns } from './dist/oxfmt.mjs';
 
 export default defineConfig({
   $schema: './node_modules/oxfmt/configuration_schema.json',
@@ -70,7 +70,7 @@ None of those objects include `$schema`.
 
 ## Workflow: editing and testing
 
-Because `oxfmt.config.ts` imports from `./dist/index.mjs`, **you must rebuild dist before changes to `src/` take effect**:
+Because `oxfmt.config.ts` imports from `./dist/oxfmt.mjs`, **you must rebuild dist before changes to `src/` take effect**:
 
 ```bash
 pnpm build        # rebuild dist
@@ -105,7 +105,7 @@ npx oxfmt --check src/oxfmt/types/sorting.types.ts
 
 ## Config object reference
 
-The final merged config object that oxfmt receives looks like this (from `dist/index.mjs`):
+The final merged config object that oxfmt receives looks like this (from `dist/oxfmt.mjs`):
 
 ```ts
 // from base (see base.config.ts for current values):
@@ -139,4 +139,4 @@ Per-file overrides are layered on top via the `overrides` array.
 
 ## Agent instruction markdown
 
-This repo exports `AGENT_DOC_MARKDOWN_PATHS` and `agentMarkdown` from `src/patterns/agent-docs.patterns.ts`. The root `oxfmt.config.ts` applies the standard `markdown` preset to most `*.md` / `*.mdx` files, **excludes** those paths, and applies `agentMarkdown` only to agent instruction files so Copilot/Cursor/Claude paths stay formatted consistently without fighting stricter prose rules on normal docs.
+This repo exports `AGENT_DOC_MARKDOWN_PATHS` and `agentMarkdown` from `src/oxfmt/ignore-agents.patterns.ts`. The root `oxfmt.config.ts` applies the standard `markdown` preset to most `*.md` / `*.mdx` files, **excludes** those paths, and applies `agentMarkdown` only to agent instruction files so Copilot/Cursor/Claude paths stay formatted consistently without fighting stricter prose rules on normal docs.
