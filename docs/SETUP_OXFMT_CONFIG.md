@@ -6,14 +6,16 @@ A guide to configuring oxfmt in this repo, including a critical gotcha that caus
 
 ## How the config is structured
 
-| Export / area                                              | Source                                       | Purpose                                            |
-| ---------------------------------------------------------- | -------------------------------------------- | -------------------------------------------------- |
-| `base`, `typescript`, `json`, `markdown`, `css`, `sorting` | `src/config/formatting/`                     | Named formatting and sort presets                  |
-| `ignorePatterns`                                           | `src/config/patterns/ignore.patterns.ts`     | Globs to exclude from formatting                   |
-| `AGENT_DOC_*`, `agentMarkdown`                             | `src/config/patterns/agent-docs.patterns.ts` | Agent instruction paths + relaxed markdown options |
-| `SORTING_GROUP_*`, `SORT_PRESET_*`                         | `src/config/sorting-groups/`                 | Composable import-sort groups                      |
+| Export / area                                              | Source                                | Purpose                                            |
+| ---------------------------------------------------------- | ------------------------------------- | -------------------------------------------------- |
+| `base`, `typescript`, `json`, `markdown`, `css`, `sorting` | `src/oxfmt/formatting/`               | Named formatting and sort presets                  |
+| `ignorePatterns`                                           | `src/patterns/ignore.patterns.ts`     | Globs to exclude from formatting                   |
+| `AGENT_DOC_*`, `agentMarkdown`                             | `src/patterns/agent-docs.patterns.ts` | Agent instruction paths + relaxed markdown options |
+| `SORTING_GROUP_*`, `SORT_PRESET_*`                         | `src/oxfmt/sorting-groups/`           | Composable import-sort groups                      |
 
 These are compiled to `dist/index.mjs` via `pnpm build` (tsdown). The root `oxfmt.config.ts` imports from the compiled dist — not from source — so TypeScript path aliases in `src/` do not affect the formatter binary.
+
+> **Package rename:** In v2.0.0 the package was renamed from `@finografic/oxfmt-config` to `@finografic/oxc-config`. Update your install command and import paths accordingly.
 
 ---
 
@@ -23,7 +25,7 @@ These are compiled to `dist/index.mjs` via `pnpm build` (tsdown). The root `oxfm
 
 `$schema` is a JSON meta-property for editor validation hints. It is **not** an oxfmt formatting option. If an object you spread into `defineConfig()` includes `$schema`, oxfmt may treat it as a directive to re-initialize from the referenced schema file — resetting options to schema defaults.
 
-The shipped `base` preset in this repo (`src/config/formatting/base.config.ts`) **omits** `$schema` so `...base` is safe. Set `$schema` only on the top-level `defineConfig({ ... })` argument (as in the root `oxfmt.config.ts`).
+The shipped `base` preset in this repo (`src/oxfmt/formatting/base.config.ts`) **omits** `$schema` so `...base` is safe. Set `$schema` only on the top-level `defineConfig({ ... })` argument (as in the root `oxfmt.config.ts`).
 
 Example of what **not** to put inside a spread preset:
 
@@ -93,10 +95,10 @@ pnpm dev          # rebuild on file change (tsdown --watch)
 
 ```bash
 # Format a specific file and check the output
-npx oxfmt src/types/sorting.types.ts
+npx oxfmt src/oxfmt/types/sorting.types.ts
 
 # Check without writing (exit 1 if unformatted)
-npx oxfmt --check src/types/sorting.types.ts
+npx oxfmt --check src/oxfmt/types/sorting.types.ts
 ```
 
 ---
@@ -137,4 +139,4 @@ Per-file overrides are layered on top via the `overrides` array.
 
 ## Agent instruction markdown
 
-This repo exports `AGENT_DOC_MARKDOWN_PATHS` and `agentMarkdown` from `src/config/patterns/agent-docs.patterns.ts`. The root `oxfmt.config.ts` applies the standard `markdown` preset to most `*.md` / `*.mdx` files, **excludes** those paths, and applies `agentMarkdown` only to agent instruction files so Copilot/Cursor/Claude paths stay formatted consistently without fighting stricter prose rules on normal docs.
+This repo exports `AGENT_DOC_MARKDOWN_PATHS` and `agentMarkdown` from `src/patterns/agent-docs.patterns.ts`. The root `oxfmt.config.ts` applies the standard `markdown` preset to most `*.md` / `*.mdx` files, **excludes** those paths, and applies `agentMarkdown` only to agent instruction files so Copilot/Cursor/Claude paths stay formatted consistently without fighting stricter prose rules on normal docs.

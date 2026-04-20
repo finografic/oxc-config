@@ -1,5 +1,5 @@
 import { defineConfig } from 'oxfmt';
-import type { OxfmtConfig, OxfmtOverrideConfig } from './src/types/oxfmt.types';
+import type { OxfmtConfig, OxfmtOverrideConfig } from './src/oxfmt/types/oxfmt.types';
 
 import {
   agentMarkdown,
@@ -13,6 +13,7 @@ import {
 } from './dist/index.mjs';
 
 export default defineConfig({
+  $schema: './node_modules/oxfmt/configuration_schema.json',
   ignorePatterns,
   ...base,
   ...sorting,

@@ -1,17 +1,19 @@
 {
-  "name": "@finografic/oxfmt-config",
-  "version": "1.11.1",
-  "description": "High-performance, opinionated oxfmt formatter for the finografic ecosystem",
+  "name": "@finografic/oxc-config",
+  "version": "2.0.0",
+  "description": "Shareable oxfmt formatter and oxlint linter configuration for the finografic ecosystem",
   "keywords": [
     "config",
     "finografic",
     "genx:type:config",
+    "oxc-config",
     "oxfmt-config",
+    "oxlint-config",
     "shared-config"
   ],
-  "homepage": "https://github.com/finografic/oxfmt-config",
+  "homepage": "https://github.com/finografic/oxc-config",
   "bugs": {
-    "url": "https://github.com/finografic/oxfmt-config/issues"
+    "url": "https://github.com/finografic/oxc-config/issues"
   },
   "license": "MIT",
   "author": {
@@ -21,7 +23,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/finografic/oxfmt-config.git"
+    "url": "git+https://github.com/finografic/oxc-config.git"
   },
   "files": [
     "dist",
@@ -68,7 +70,7 @@
     "release:check": "pnpm format:check && pnpm lint:fix && pnpm typecheck && pnpm test:run",
     "release:publish": "pnpm publish --registry https://npm.pkg.github.com",
     "·········· REGISTRIES": "················································",
-    "view:registry:github": "pnpm view @finografic/oxfmt-config --registry=https://npm.pkg.github.com",
+    "view:registry:github": "pnpm view @finografic/oxc-config --registry=https://npm.pkg.github.com",
     "·········· PACKAGES": "··················································",
     "update:core": "pnpm update @finografic/core --latest",
     "update:md-lint": "pnpm update @finografic/md-lint --latest",
@@ -103,7 +105,8 @@
     "vitest": "^4.1.4"
   },
   "peerDependencies": {
-    "oxfmt": ">=0.41.0"
+    "oxfmt": ">=0.41.0",
+    "oxlint": ">=1.0.0"
   },
   "packageManager": "pnpm@10.32.1",
   "lint-staged": {

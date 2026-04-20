@@ -1,4 +1,4 @@
-import type { OxfmtMarkdownConfig } from 'types/oxfmt.types';
+import type { OxfmtMarkdownConfig } from 'oxfmt/types/oxfmt.types';
 
 export const markdown = {
   embeddedLanguageFormatting: 'off', // "auto" (default) | "off"

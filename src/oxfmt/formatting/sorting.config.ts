@@ -6,8 +6,7 @@
  * @see https://perfectionist.dev/rules/sort-imports  (Oxfmt sorting based on this)
  */
 import type { OxfmtConfig } from 'oxfmt';
-
-import type { SortImportsConfig } from 'types/sorting.types';
+import type { SortImportsConfig } from 'oxfmt/types/sorting.types';
 
 export const sorting = {
   sortImports: {

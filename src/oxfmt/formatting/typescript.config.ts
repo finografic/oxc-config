@@ -1,4 +1,4 @@
-import type { OxfmtConfig } from 'types/oxfmt.types';
+import type { OxfmtConfig } from 'oxfmt/types/oxfmt.types';
 
 /**
  * TypeScript/TSX-specific formatting overrides.

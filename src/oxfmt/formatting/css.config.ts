@@ -1,4 +1,4 @@
-import type { OxfmtCssConfig } from 'types/oxfmt.types';
+import type { OxfmtCssConfig } from 'oxfmt/types/oxfmt.types';
 
 // NOTE: Oxfmt options that relate to CSS formatting
 

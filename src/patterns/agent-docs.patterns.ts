@@ -1,4 +1,4 @@
-import type { OxfmtConfig } from 'types/oxfmt.types';
+import type { OxfmtConfig } from 'oxfmt/types/oxfmt.types';
 
 /**
  * Known agent/AI instruction document paths across the ecosystem.
@@ -52,6 +52,7 @@ export const AGENT_DOC_PATHS = [
 export const AGENT_DOC_MARKDOWN_PATHS = AGENT_DOC_PATHS.filter(
   (p): p is Extract<(typeof AGENT_DOC_PATHS)[number], `${string}.md`> => p.endsWith('.md'),
 );
+
 /**
  * Relaxed markdown formatting for agent instruction docs.
  *

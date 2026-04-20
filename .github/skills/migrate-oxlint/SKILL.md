@@ -189,8 +189,43 @@ Additional oxlint options:
 - If you are not using any JS Plugins and have replaced your ESLint configuration, you can remove all ESLint packages from your project dependencies.
 - Ensure your editor is configured to use oxlint instead of ESLint for linting and error reporting. You may want to install the Oxc extension for your preferred editor. See https://oxc.rs/docs/guide/usage/linter/editors.html for more details.
 
+## Step 6: Adopt the shared finografic config (optional)
+
+If this project is part of the finografic ecosystem, replace the generated `.oxlintrc.json` with a TypeScript config that imports composable pieces from `@finografic/oxc-config`:
+
+```bash
+pnpm add -D @finografic/oxc-config
+```
+
+```ts
+// oxlint.config.ts
+import { defineConfig } from 'oxlint';
+import type { OxlintConfig } from 'oxlint';
+import {
+  baseRules,
+  configOverrides,
+  lintCategories,
+  lintIgnorePatterns,
+  lintOptions,
+  lintPlugins,
+  testOverrides,
+} from '@finografic/oxc-config';
+
+export default defineConfig({
+  plugins: [...lintPlugins],
+  ...lintOptions,
+  rules: { ...baseRules },
+  categories: { ...lintCategories },
+  overrides: [testOverrides, configOverrides],
+  ignorePatterns: [...lintIgnorePatterns],
+} satisfies OxlintConfig);
+```
+
+See [docs/SETUP_OXLINT_CONFIG.md](../../docs/SETUP_OXLINT_CONFIG.md) for composition patterns and customization options.
+
 ## References
 
 - [CLI Reference](https://oxc.rs/docs/guide/usage/linter/cli.html)
 - [Config File Reference](https://oxc.rs/docs/guide/usage/linter/config-file-reference.html)
 - [Complete Oxlint rule list and docs](https://oxc.rs/docs/guide/usage/linter/rules.html)
+- [`@finografic/oxc-config` setup guide](../../docs/SETUP_OXLINT_CONFIG.md)

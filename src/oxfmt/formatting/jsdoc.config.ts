@@ -9,7 +9,7 @@ import type { OxfmtConfig } from 'oxfmt';
  *
  * @see https://oxc.rs/docs/guide/usage/formatter/config-file-reference.html#jsdoc
  */
-export const jsdocConfig = {
+export const jsdoc = {
   jsdoc: {
     /**
      * Append default values to `@param` descriptions (e.g. "Default is `value`").

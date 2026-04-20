@@ -1,8 +1,8 @@
-import type { OxfmtHtmlConfig } from 'types/oxfmt.types';
+import type { OxfmtHtmlConfig } from 'oxfmt/types/oxfmt.types';
 
 // NOTE: Oxfmt options that relate to HTML formatting
 
-export const htmlConfig = {
+export const html = {
   bracketSameLine: false,
   htmlWhitespaceSensitivity: 'css', // "css" (default) | "strict" | "ignore",
   printWidth: 110,

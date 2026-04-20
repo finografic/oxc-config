@@ -1,4 +1,4 @@
-import type { CustomGroupItemConfig } from 'types/sorting.types';
+import type { CustomGroupItemConfig } from 'oxfmt/types/sorting.types';
 
 // ── React framework group ─────────────────────────────
 

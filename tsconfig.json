@@ -21,13 +21,10 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "paths": {
-      "formatting": ["./src/config/formatting/index.ts"],
-      "formatting/*": ["./src/config/formatting/*"],
-      "patterns": ["./src/config/patterns/index.ts"],
-      "patterns/*": ["./src/config/patterns/*"],
-      "sorting-groups": ["./src/config/sorting-groups/index.ts"],
-      "sorting-groups/*": ["./src/config/sorting-groups/*"],
-      "types/*": ["./src/types/*"]
+      "oxfmt/*": ["./src/oxfmt/*"],
+      "oxlint/*": ["./src/oxlint/*"],
+      "patterns": ["./src/patterns/index.ts"],
+      "patterns/*": ["./src/patterns/*"]
     }
   },
   "include": ["src/**/*"],
