@@ -6,6 +6,8 @@ export const lintIgnorePatterns = [
   '**/*.min.*',
   '**/*.map',
   '*.d.ts',
+  '**/tsconfig.json',
+  '**/tsconfig.*.json',
 
   // ── Agent tooling internals ─────────────────────────
   '**/.ai/**',
