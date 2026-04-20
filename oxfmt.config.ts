@@ -2,8 +2,8 @@ import { defineConfig } from 'oxfmt';
 import type { OxfmtConfig, OxfmtOverrideConfig } from './src/oxfmt/types/oxfmt.types';
 
 import {
-  agentMarkdown,
   AGENT_DOC_MARKDOWN_PATHS,
+  agentMarkdown,
   base,
   css,
   ignorePatterns,

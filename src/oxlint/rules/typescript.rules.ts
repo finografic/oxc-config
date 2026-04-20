@@ -44,6 +44,7 @@ export const typescriptRules: DummyRuleMap = {
   'typescript/prefer-for-of': 'error',
   'typescript/prefer-function-type': 'error',
   'typescript/unified-signatures': 'error',
+  'typescript/no-unsafe-type-assertion': 'off', // custom
   'typescript/no-floating-promises': 'off',
   'typescript/await-thenable': 'error',
   'typescript/consistent-indexed-object-style': ['error', 'record'],

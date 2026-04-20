@@ -1,7 +1,7 @@
 import { defineConfig } from 'oxlint';
 import type { OxlintConfig } from 'oxlint';
 
-import { env, options, plugins } from '../dist/oxlint.mjs';
+import { env, options, plugins } from '../src/oxlint/index';
 
 export default defineConfig({
   plugins,

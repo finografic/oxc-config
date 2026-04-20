@@ -2,14 +2,14 @@ import { defineConfig } from 'oxlint';
 import type { OxlintConfig } from 'oxlint';
 
 import {
-  rules,
-  loosenRules,
-  configOverrides,
   categories,
-  ignorePatterns,
-  options,
+  configOverrides,
   env,
+  ignorePatterns,
+  loosenRules,
+  options,
   plugins,
+  rules,
   testOverrides,
 } from './dist/oxlint.mjs';
 
