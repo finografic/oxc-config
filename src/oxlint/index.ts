@@ -6,6 +6,7 @@ export { plugins } from './plugins';
 
 // ── oxlint: composable rules sets ─────────────────
 export { baseRules } from './rules/base.rules';
+export { jsDocRules } from './rules/jsdoc.rules';
 export { typescriptRules } from './rules/typescript.rules';
 export { unicornRules } from './rules/unicorn.rules';
 

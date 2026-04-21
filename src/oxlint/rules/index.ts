@@ -1,6 +1,7 @@
 import type { DummyRuleMap } from 'oxlint';
 
 import { baseRules } from './base.rules';
+import { jsDocRules } from './jsdoc.rules';
 import { typescriptRules } from './typescript.rules';
 import { unicornRules } from './unicorn.rules';
 
@@ -22,4 +23,5 @@ export const rules = {
   ...baseRules,
   ...typescriptRules,
   ...unicornRules,
+  ...jsDocRules,
 } as const satisfies DummyRuleMap;
