@@ -10,4 +10,26 @@ import type { DummyRuleMap } from 'oxlint';
  */
 export const loosenRules: DummyRuleMap = {
   'eslint/no-await-in-loop': 'off',
+  'react-perf/jsx-no-new-function-as-prop': 'off',
+  'react-perf/jsx-no-new-object-as-prop': 'off',
+
+  'typescript/explicit-function-return-type': [
+    'warn',
+    {
+      allowConciseArrowFunctionExpressionsStartingWithVoid: true,
+      allowDirectConstAssertionInArrowFunctions: true,
+      allowExpressions: true,
+      allowFunctionsWithoutTypeParameters: true,
+      allowHigherOrderFunctions: true,
+      allowIIFEs: true,
+      allowTypedFunctionExpressions: true,
+    },
+  ],
+
+  'jsdoc/check-tag-names': [
+    'warn',
+    {
+      definedTags: ['finografic', 'finografic/design-system/styles/reset.css'],
+    },
+  ],
 };

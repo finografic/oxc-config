@@ -22,7 +22,7 @@ jobs:
         with:
           node-version: 24
           registry-url: https://npm.pkg.github.com
-          scope: '@finografic'
+          scope: "@finografic"
 
       - name: Setup pnpm
         uses: pnpm/action-setup@v3
@@ -37,9 +37,6 @@ jobs:
       - name: Build
         run: pnpm build
 
-      - name: Format check
-        run: pnpm format:check
-
       - name: Lint
         run: pnpm lint:ci
 
@@ -48,3 +45,6 @@ jobs:
 
       - name: Type check
         run: pnpm typecheck
+
+      - name: Format check
+        run: pnpm format:check
