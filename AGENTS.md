@@ -84,8 +84,11 @@ Shared across Claude Code, Cursor, and GitHub Copilot.
 - When documenting sorting, use current group names (`hooks`, `client-routes`, `server-routes`, `tests`, …) — not the removed `hooks-routes` / `SORTING_GROUP_HOOKS_ROUTES`.
 - Prefer linking to `docs/SETUP_OXFMT_CONFIG.md` and `docs/OXFMT_SORT_GROUPS.md` for formatter and import-sort details; link to `docs/SETUP_OXLINT_CONFIG.md` for linter details.
 - For agent instruction markdown, prefer narrow path targeting plus `AGENT_DOC_PATHS` / `agentMarkdown` (see `src/oxfmt/ignore-agents.patterns.ts`) over blanket `**/.github/**` ignores when other `.github` markdown should still format; excluding `**/.claude/**` is a common choice for local-only agent files.
+- For JSDoc-related linting, prefer a loose profile: do not require exhaustive tags, descriptions on every symbol, or `@example` everywhere unless the user explicitly asks for stricter enforcement.
+- With pnpm, forward flags to a script by placing them after `--` (e.g. `pnpm run <script> -- <args>`) so pnpm does not consume them.
 
 ## Learned Workspace Facts
 
 - `ignorePatterns` in `src/oxfmt/ignore.patterns.ts` (formatter) deliberately omits blanket `**/.github/**` and `**/.cursor/**`; known agent doc paths are handled via overrides/constants in `src/oxfmt/ignore-agents.patterns.ts`, not by skipping entire `.github` / `.cursor` trees.
 - `ignorePatterns` exported from `src/oxlint/ignore.patterns.ts` is the oxlint-specific ignore list — it covers `*.d.ts`, `.astro/**`, and agent tooling dirs that oxlint should skip but oxfmt need not ignore.
+- `pnpm oxlint:config:capture` (root `oxlint.config.ts`) writes a resolved snapshot to `internal/configs/oxlint.config.json`; `pnpm oxlint:config:capture:defaults` writes `scripts/oxlint-defaults.config.ts` resolved output to `internal/configs/oxlint-defaults.config.json` (see `scripts/print-oxlint-config.ts`).
