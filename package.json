@@ -1,6 +1,6 @@
 {
   "name": "@finografic/oxc-config",
-  "version": "2.3.10",
+  "version": "2.3.11",
   "description": "Shareable oxfmt formatter and oxlint linter configuration for the finografic ecosystem",
   "keywords": [
     "config",
