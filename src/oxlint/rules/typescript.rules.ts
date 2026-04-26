@@ -19,7 +19,7 @@ export const typescriptRules: DummyRuleMap = {
   'typescript/consistent-indexed-object-style': ['error', 'record'],
   'typescript/consistent-type-imports': [
     'error',
-    { prefer: 'type-imports', fixStyle: 'separate-type-imports' },
+    { prefer: 'type-imports', fixStyle: 'separate-type-imports', disallowTypeAnnotations: false },
   ],
   'typescript/adjacent-overload-signatures': 'error',
   'typescript/array-type': ['warn', { default: 'array-simple' }],
