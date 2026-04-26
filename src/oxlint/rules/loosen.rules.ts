@@ -10,6 +10,9 @@ import type { DummyRuleMap } from 'oxlint';
  */
 export const loosenRules: DummyRuleMap = {
   'eslint/no-await-in-loop': 'off',
+
+  // oxlint doesn't understand exhaustive switch statements — TypeScript already enforces this
+  'typescript/consistent-return': 'off',
   'react-perf/jsx-no-new-function-as-prop': 'off',
   'react-perf/jsx-no-new-object-as-prop': 'off',
 
