@@ -17,7 +17,7 @@ export const IGNORE_PATTERNS_LINT = [
   // We intentionally avoid blanket ignores like '**/.github/**'
   // or '**/.cursor/**' because agent instruction files live there.
   // Instead, ignore only the non-doc subdirectories.
-  '**/.ai/**',
+  '**/.agents/**',
   '**/.cursor/hooks/**',
   '**/.cursor/chats/**',
   '**/.claude/todos*',
