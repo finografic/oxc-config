@@ -47,6 +47,7 @@
     "default": true,
     "MD013": { "line_length": 180, "tables": false, "code_blocks": true }, // Allow line length
     "MD025": false, // Allow multiple top-level headings
+    "MD036": false, // Allow headings to be in bold
     "MD041": false // Don't require first line to be a top-level heading
   },
 
