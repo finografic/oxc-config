@@ -2,7 +2,7 @@
 
 ## Rules — Project-Specific
 
-Project-specific rules live in `.github/instructions/project/*.instructions.md`.
+Project-specific rules live in `.github/instructions/project/*.instructions.md`
 
 ## Rules — Global
 
@@ -37,5 +37,3 @@ Shared across Claude Code, Cursor, and GitHub Copilot.
 **Git**
 
 - Git policy: `.github/instructions/git/git-policy.instructions.md`
-
----

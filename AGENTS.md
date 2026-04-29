@@ -1,17 +1,4 @@
-# AGENTS.md - AI Assistant Guide
-
-## Roadmap and Planning Docs
-
-**`docs/todo/ROADMAP.md` is the primary high-level plan for this project.**
-**`docs/todo/NEXT_STEPS.md` is the near-term working list** — small tasks, fixes, and manual testing checklists too small for ROADMAP.
-
-- Before proposing or generating new features, check the roadmap for existing items.
-- When conceiving a new feature or initiative, add it to the appropriate priority tier.
-- Detailed planning docs live alongside in `docs/todo/` as `TODO_*.md` (active) or `DONE_*.md` (complete).
-- **TODO/DONE doc conventions:** `.github/instructions/documentation/todo-done-docs.instructions.md`
-  — rules for naming, status headers, checkboxes, and graduating `TODO_` → `DONE_`.
-
----
+# AGENTS.md — AI Assistant Guide
 
 ## Rules — Project-Specific
 
@@ -64,18 +51,34 @@ Shared across Claude Code, Cursor, and GitHub Copilot.
 - Padded pipes: one space on each side of every `|`, including the separator row.
 - Align column widths so all cells in the same column are equal width.
 
+---
+
 ## Git Policy
 
-- IMPORTANT: NEVER include `Co-Authored-By` lines in commit messages. Not ever, not for any reason.
-- [Git — Commits](/.github/instructions/git/git-policy.instructions.md#commits)
-- [Git — Releases](/.github/instructions/git/git-policy.instructions.md#releases)
+- IMPORTANT: NEVER include `Co-Authored-By` lines in commit messages. Non-negotiable.
+- `.github/instructions/git/git-policy.instructions.md` (see Commits and Releases sections)
+
+---
+
+## Roadmap and Planning Docs
+
+**`docs/todo/ROADMAP.md` is the primary high-level plan for this project.**
+**`docs/todo/NEXT_STEPS.md` is the near-term working list** — small tasks, fixes, and manual testing checklists too small for ROADMAP.
+
+- Before proposing or generating new features, check the roadmap for existing items.
+- When conceiving a new feature or initiative, add it to the appropriate priority tier.
+- Detailed planning docs live alongside in `docs/todo/` as `TODO_*.md` (active) or `DONE_*.md` (complete).
+- **TODO/DONE doc conventions:** `.github/instructions/documentation/todo-done-docs.instructions.md`
+  — rules for naming, status headers, checkboxes, and graduating `TODO_` → `DONE_`.
+
+---
 
 ## Claude Code — Session Memory and Handoff
 
 > This section applies to Claude Code only. Other agents can ignore it.
 
 - **Session log:** `.claude/memory.md` (gitignored) — maintenance rules are in that file.
-- **Project state snapshot:** `.ai/handoff.md` (git-tracked) — maintenance rules are in that file.
+- **Project state snapshot:** `.agents/handoff.md` (git-tracked) — maintenance rules are in that file.
 
 ---
 
