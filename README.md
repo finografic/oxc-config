@@ -303,11 +303,13 @@ Add your own `overrides` on top.
 | `oxlintCliConfig`     | Node CLI tools and scripts — identical to server; `no-console` is already `off`      |
 | `oxlintLibraryConfig` | Config-only or utility libraries — correctness only, no `perf` or `suspicious`       |
 
-**Key differences at a glance:**
+#### Key differences at a glance
+
+**NOTE:** all presets set **`correctness`** category: `error`
 
 |                 | `env`     | `react` plugin | `perf` category | `suspicious` category |
 | --------------- | --------- | -------------- | --------------- | --------------------- |
-| `oxlintClient`  | `browser` | ✓              | `warn`          | `warn`                |
+| `oxlintClient`  | `browser` | ✅             | `warn`          | `warn`                |
 | `oxlintServer`  | `node`    | —              | —               | `warn`                |
 | `oxlintCli`     | `node`    | —              | —               | `warn`                |
 | `oxlintLibrary` | `node`    | —              | —               | —                     |
