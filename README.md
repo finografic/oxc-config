@@ -1,6 +1,6 @@
 # @finografic/oxc-config
 
-> Shareable oxfmt formatter and oxlint linter configuration for the finografic ecosystem
+> Opinionated shared oxfmt + oxlint configuration for TypeScript-first projects
 
 One install for both [**oxfmt**](https://oxc.rs/docs/guide/usage/formatter) and [**oxlint**](https://oxc.rs/docs/guide/usage/linter) — the Rust-powered **Oxc/VoidZero** toolchain. Composable presets spread directly into your config files.
 
