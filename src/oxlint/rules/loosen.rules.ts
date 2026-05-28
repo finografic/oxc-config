@@ -11,6 +11,14 @@ import type { DummyRuleMap } from 'oxlint';
 export const loosenRules: DummyRuleMap = {
   'eslint/no-await-in-loop': 'off',
 
+  /** Node/TS idioms — allow common double-underscore identifiers (requires oxlint >= 1.67). */
+  'eslint/no-underscore-dangle': [
+    'warn',
+    {
+      allow: ['__dirname', '__filename', '__proto__'],
+    },
+  ],
+
   // oxlint doesn't understand exhaustive switch statements — TypeScript already enforces this
   'typescript/consistent-return': 'off',
   'react-perf/jsx-no-new-function-as-prop': 'off',
