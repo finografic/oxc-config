@@ -1,6 +1,6 @@
 {
   "name": "@finografic/oxc-config",
-  "version": "2.6.2",
+  "version": "2.6.3",
   "description": "Opinionated shared oxfmt + oxlint configuration for TypeScript-first projects",
   "keywords": [
     "config",
