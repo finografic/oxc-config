@@ -19,6 +19,9 @@ export const loosenRules: DummyRuleMap = {
     },
   ],
 
+  /** Local helpers inside branches are fine; suspicious category enables this as warn by default. */
+  'unicorn/consistent-function-scoping': 'off',
+
   // oxlint doesn't understand exhaustive switch statements — TypeScript already enforces this
   'typescript/consistent-return': 'off',
   'react-perf/jsx-no-new-function-as-prop': 'off',

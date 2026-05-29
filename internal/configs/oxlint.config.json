@@ -309,7 +309,7 @@
     "typescript/triple-slash-reference": "deny",
     "typescript/unbound-method": "deny",
     "typescript/unified-signatures": "deny",
-    "unicorn/consistent-function-scoping": "warn",
+    "unicorn/consistent-function-scoping": "allow",
     "unicorn/no-accessor-recursion": "warn",
     "unicorn/no-array-reverse": "warn",
     "unicorn/no-array-sort": "warn",
