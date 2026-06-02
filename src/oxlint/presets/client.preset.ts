@@ -47,6 +47,6 @@ export const oxlintClientConfig = {
     suspicious: 'warn',
     perf: 'warn',
   },
-  rules: { ...rules, ...loosenRules },
+  rules: { ...rules, ...loosenRules, 'react/react-in-jsx-scope': 'off' },
   ignorePatterns: [...IGNORE_PATTERNS_LINT],
 } satisfies OxlintConfig;
