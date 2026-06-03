@@ -8,12 +8,13 @@ This package exposes `SORTING_GROUP_*` constants and `SORT_PRESET_*` arrays so c
 
 | Module           | File                                        | Contents                                                                             |
 | ---------------- | ------------------------------------------- | ------------------------------------------------------------------------------------ |
-| Universal groups | `src/oxfmt/sorting-groups/base.groups.ts`   | workspace, lib-utils, types-constants, styles, **tests**                             |
+| Universal groups | `src/oxfmt/sorting-groups/base.groups.ts`   | workspace, **path-alias**, lib-utils, types-constants, styles, **tests**             |
 | Client           | `src/oxfmt/sorting-groups/client.groups.ts` | pages-components, hooks, client-routes                                               |
 | React            | `src/oxfmt/sorting-groups/react.groups.ts`  | react                                                                                |
 | Server           | `src/oxfmt/sorting-groups/server.groups.ts` | server-layers, server-routes, api                                                    |
 | Presets          | `src/oxfmt/sorting-groups/presets.ts`       | `SORT_PRESET_CLIENT`, `SORT_PRESET_SERVER`, `SORT_PRESET_CLI`, `SORT_PRESET_LIBRARY` |
-| Base preset      | `src/oxfmt/formatting/sorting.config.ts`    | Default `sorting` spread (workspace + lib-utils + types-constants + styles only)     |
+| Base orders      | `src/oxfmt/sorting-groups/orders.ts`        | `SORT_CUSTOM_GROUPS_BASE`, `SORT_GROUPS_BASE`, `SORT_IMPORTS_SHARED_OPTIONS`         |
+| Base preset      | `src/oxfmt/formatting/sorting.config.ts`    | Default `sorting` spread (uses `orders.ts` — no duplicated group patterns)           |
 
 Barrel: `src/oxfmt/sorting-groups/index.ts`. Public re-exports: `src/oxfmt/index.ts` → `@finografic/oxc-config/oxfmt`.
 
@@ -59,6 +60,7 @@ export default defineConfig({
       'pages-components',
       'hooks',
       'client-routes',
+      'path-alias',
       'lib-utils',
       'types-constants',
       ['value-internal', 'value-parent', 'value-sibling', 'value-index'],

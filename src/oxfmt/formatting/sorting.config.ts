@@ -8,60 +8,21 @@
 import type { OxfmtConfig } from 'oxfmt';
 import type { SortImportsConfig } from 'oxfmt/types/sorting.types';
 
-export const sorting = {
+import {
+  SORT_CUSTOM_GROUPS_BASE,
+  SORT_GROUPS_BASE,
+  SORT_IMPORTS_SHARED_OPTIONS,
+} from '../sorting-groups/orders';
+
+type SortingPreset = Pick<Partial<OxfmtConfig>, 'sortImports' | 'rules'>;
+
+export const sorting: SortingPreset = {
   sortImports: {
-    newlinesBetween: false,
-    partitionByComment: true,
-    customGroups: [
-      {
-        groupName: 'workspace',
-        elementNamePattern: ['@workspace/**', '@finografic/**'],
-      },
-      {
-        groupName: 'lib-utils',
-        elementNamePattern: ['lib/**', 'utils/**', './lib/**', './utils/**'],
-      },
-      {
-        groupName: 'types-constants',
-        elementNamePattern: [
-          'types/**',
-          'constants/**',
-          'config/**',
-          './types/**',
-          './constants/**',
-          './config/**',
-        ],
-      },
-      {
-        groupName: 'styles',
-        elementNamePattern: ['styles/**', './styles/**', '*.css', '*.scss', '*.styles'],
-      },
-    ],
-    groups: [
-      'value-builtin',
-      'workspace',
-      'value-external',
-      'type-import',
-
-      { newlinesBetween: true },
-
-      'lib-utils',
-
-      { newlinesBetween: true },
-
-      'types-constants',
-
-      { newlinesBetween: true },
-
-      ['value-internal', 'value-parent', 'value-sibling', 'value-index'],
-
-      { newlinesBetween: true },
-
-      'styles',
-      'unknown',
-    ],
-  } as const satisfies SortImportsConfig,
+    ...SORT_IMPORTS_SHARED_OPTIONS,
+    customGroups: [...SORT_CUSTOM_GROUPS_BASE],
+    groups: [...SORT_GROUPS_BASE],
+  } satisfies SortImportsConfig,
   rules: {
     'typescript/no-import-type-side-effects': 'error',
   },
-} as const satisfies Partial<OxfmtConfig>;
+};

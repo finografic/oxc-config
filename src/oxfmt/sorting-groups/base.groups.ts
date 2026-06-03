@@ -5,12 +5,18 @@ import type { CustomGroupItemConfig } from 'oxfmt/types/sorting.types';
 export const SORTING_GROUP_WORKSPACE = {
   groupName: 'workspace',
   elementNamePattern: ['@finografic/**', '@workspace/**'],
-} as const satisfies CustomGroupItemConfig;
+} satisfies CustomGroupItemConfig;
+
+/** Tsconfig / Vite `@/` path alias (e.g. `@/components/**`, `@/lib/utils`). */
+export const SORTING_GROUP_PATH_ALIAS = {
+  groupName: 'path-alias',
+  elementNamePattern: ['@/**'],
+} satisfies CustomGroupItemConfig;
 
 export const SORTING_GROUP_LIB_UTILS = {
   groupName: 'lib-utils',
   elementNamePattern: ['lib/**', 'utils/**', './lib/**', './utils/**'],
-} as const satisfies CustomGroupItemConfig;
+} satisfies CustomGroupItemConfig;
 
 export const SORTING_GROUP_TYPES_CONSTANTS = {
   groupName: 'types-constants',
@@ -22,14 +28,14 @@ export const SORTING_GROUP_TYPES_CONSTANTS = {
     './constants/**',
     './config/**',
   ],
-} as const satisfies CustomGroupItemConfig;
+} satisfies CustomGroupItemConfig;
 
 export const SORTING_GROUP_STYLES = {
   groupName: 'styles',
   elementNamePattern: ['styles/**', './styles/**', '*.css', '*.scss', '*.styles'],
-} as const satisfies CustomGroupItemConfig;
+} satisfies CustomGroupItemConfig;
 
 export const SORTING_GROUP_TESTS = {
   groupName: 'tests',
   elementNamePattern: ['__tests__/**', '*.test.*', '*.spec.*', 'test-utils/**', './test-utils/**'],
-} as const satisfies CustomGroupItemConfig;
+} satisfies CustomGroupItemConfig;

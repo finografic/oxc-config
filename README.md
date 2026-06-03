@@ -293,6 +293,7 @@ Composable import-sort constants — use in `sortImports.customGroups` and `sort
 | Constant                         | Group name         | Matches                                                                       |
 | -------------------------------- | ------------------ | ----------------------------------------------------------------------------- |
 | `SORTING_GROUP_WORKSPACE`        | `workspace`        | `@finografic/**`, `@workspace/**`                                             |
+| `SORTING_GROUP_PATH_ALIAS`       | `path-alias`       | `@/**` (tsconfig / Vite `@/` imports)                                         |
 | `SORTING_GROUP_LIB_UTILS`        | `lib-utils`        | `lib/**`, `utils/**` (with `./` variants)                                     |
 | `SORTING_GROUP_TYPES_CONSTANTS`  | `types-constants`  | `types/**`, `constants/**`, `config/**` (with `./` variants)                  |
 | `SORTING_GROUP_STYLES`           | `styles`           | `styles/**`, `*.css`, `*.scss`, `*.styles`                                    |
@@ -377,6 +378,7 @@ export default defineConfig({
       'pages-components',
       'hooks',
       'client-routes',
+      'path-alias',
       'lib-utils',
       'types-constants',
       ['value-internal', 'value-parent', 'value-sibling', 'value-index'],

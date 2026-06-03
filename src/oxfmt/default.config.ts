@@ -11,7 +11,7 @@ import {
   sorting,
 } from '.';
 
-export const oxfmtConfig = {
+export const oxfmtConfig: OxfmtConfig = {
   $schema: './node_modules/oxfmt/configuration_schema.json',
   ignorePatterns,
   ...base,
@@ -30,4 +30,4 @@ export const oxfmtConfig = {
     },
     { files: ['*.css', '*.scss'], excludeFiles: [], options: { ...css } },
   ] satisfies OxfmtOverrideConfig[],
-} satisfies OxfmtConfig;
+};
