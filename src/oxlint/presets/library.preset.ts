@@ -1,7 +1,7 @@
-import type { OxlintConfig } from 'oxlint';
-
+import { assertOxlintRules } from '../assert-rules';
 import { IGNORE_PATTERNS_LINT } from '../ignore.patterns';
 import { options } from '../options';
+import { defineOxlintPreset } from '../preset.types';
 import { rules } from '../rules/index';
 import { loosenRules } from '../rules/loosen.rules';
 
@@ -24,7 +24,7 @@ import { loosenRules } from '../rules/loosen.rules';
  * });
  * ```
  */
-export const oxlintLibraryConfig = {
+export const oxlintLibraryConfig = defineOxlintPreset({
   plugins: ['eslint', 'typescript', 'unicorn', 'oxc', 'import', 'jsdoc', 'node', 'promise', 'vitest'],
   env: {
     builtin: true,
@@ -34,6 +34,6 @@ export const oxlintLibraryConfig = {
   categories: {
     correctness: 'error',
   },
-  rules: { ...rules, ...loosenRules },
+  rules: assertOxlintRules({ ...rules, ...loosenRules }),
   ignorePatterns: [...IGNORE_PATTERNS_LINT],
-} satisfies OxlintConfig;
+});

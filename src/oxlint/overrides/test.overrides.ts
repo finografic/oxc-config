@@ -1,8 +1,8 @@
-import type { OxlintOverride } from 'oxlint';
+import { assertOxlintRules } from '../assert-rules';
 
-export const testOverrides: OxlintOverride = {
+export const testOverrides = {
   files: ['**/*.spec.ts', '**/*.test.ts', '__tests__/**/*.ts'],
-  rules: {
+  rules: assertOxlintRules({
     'import/first': 'off',
     'import/no-amd': 'error',
     'import/no-self-import': 'error',
@@ -10,5 +10,5 @@ export const testOverrides: OxlintOverride = {
     'vitest/valid-title': ['off'],
     'vitest/require-mock-type-parameters': 'off',
     'vitest/prefer-snapshot-hint': 'off',
-  },
+  }),
 };

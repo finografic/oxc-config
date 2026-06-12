@@ -1,4 +1,4 @@
-import type { DummyRuleMap } from 'oxlint';
+import { assertOxlintRules } from '../assert-rules';
 
 /**
  * JSDoc rules: opt in to **light hygiene only** — no mandatory descriptions, params, returns, or examples.
@@ -6,7 +6,7 @@ import type { DummyRuleMap } from 'oxlint';
  *
  * @see https://oxc.rs/docs/guide/usage/linter/rules.html — filter by `jsdoc`
  */
-export const jsDocRules = {
+export const jsDocRules = assertOxlintRules({
   // --- Optional quality (warn = visible, not blocking) ---
   /** Catch typos like `@parm`; allow custom tags used in this ecosystem. */
   'jsdoc/check-tag-names': ['warn', { definedTags: ['finografic'] }],
@@ -29,4 +29,4 @@ export const jsDocRules = {
   'jsdoc/require-returns-description': 'off',
   'jsdoc/require-returns-type': 'off',
   'jsdoc/require-yields': 'off',
-} as const satisfies DummyRuleMap;
+});

@@ -1,4 +1,4 @@
-import type { DummyRuleMap } from 'oxlint';
+import { assertOxlintRules } from '../assert-rules';
 
 /**
  * Base Oxlint rule overrides shared by this config package.
@@ -14,7 +14,7 @@ import type { DummyRuleMap } from 'oxlint';
  * - Rules enabled by default: 109
  * - Rules with fixes available: 259
  */
-export const typescriptRules: DummyRuleMap = {
+export const typescriptRules = assertOxlintRules({
   'typescript/await-thenable': 'error',
   'typescript/consistent-indexed-object-style': ['error', 'record'],
   'typescript/consistent-type-imports': [
@@ -60,4 +60,4 @@ export const typescriptRules: DummyRuleMap = {
   ],
   'typescript/no-redeclare': 'warn',
   'typescript/no-floating-promises': 'off',
-};
+});

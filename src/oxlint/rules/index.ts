@@ -1,5 +1,4 @@
-import type { DummyRuleMap } from 'oxlint';
-
+import { assertOxlintRules } from '../assert-rules';
 import { baseRules } from './base.rules';
 import { jsDocRules } from './jsdoc.rules';
 import { typescriptRules } from './typescript.rules';
@@ -19,9 +18,9 @@ import { unicornRules } from './unicorn.rules';
  * - Rules enabled by default: 109
  * - Rules with fixes available: 259
  */
-export const rules = {
+export const rules = assertOxlintRules({
   ...baseRules,
   ...typescriptRules,
   ...unicornRules,
   ...jsDocRules,
-} as const satisfies DummyRuleMap;
+});

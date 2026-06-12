@@ -1,7 +1,7 @@
-import type { OxlintConfig } from 'oxlint';
-
+import { assertOxlintRules } from '../assert-rules';
 import { IGNORE_PATTERNS_LINT } from '../ignore.patterns';
 import { options } from '../options';
+import { defineOxlintPreset } from '../preset.types';
 import { rules } from '../rules/index';
 import { loosenRules } from '../rules/loosen.rules';
 
@@ -24,7 +24,7 @@ import { loosenRules } from '../rules/loosen.rules';
  * });
  * ```
  */
-export const oxlintClientConfig = {
+export const oxlintClientConfig = defineOxlintPreset({
   plugins: [
     'eslint',
     'typescript',
@@ -47,6 +47,6 @@ export const oxlintClientConfig = {
     suspicious: 'warn',
     perf: 'warn',
   },
-  rules: { ...rules, ...loosenRules, 'react/react-in-jsx-scope': 'off' },
+  rules: assertOxlintRules({ ...rules, ...loosenRules, 'react/react-in-jsx-scope': 'off' }),
   ignorePatterns: [...IGNORE_PATTERNS_LINT],
-} satisfies OxlintConfig;
+});

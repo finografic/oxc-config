@@ -1,4 +1,4 @@
-import type { DummyRuleMap } from 'oxlint';
+import { assertOxlintRules } from '../assert-rules';
 
 /**
  * Base Oxlint rule overrides shared by this config package.
@@ -14,7 +14,7 @@ import type { DummyRuleMap } from 'oxlint';
  * - Rules enabled by default: 109
  * - Rules with fixes available: 259
  */
-export const baseRules: DummyRuleMap = {
+export const baseRules = assertOxlintRules({
   'no-console': 'off',
 
   'eslint/no-debugger': 'error',
@@ -39,4 +39,4 @@ export const baseRules: DummyRuleMap = {
 
   'import/consistent-type-specifier-style': ['error', 'prefer-top-level'],
   'import/no-duplicates': 'error',
-};
+});

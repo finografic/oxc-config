@@ -1,4 +1,4 @@
-import type { DummyRuleMap } from 'oxlint';
+import { assertOxlintRules } from '../assert-rules';
 
 /**
  * Base Oxlint rule overrides shared by this config package.
@@ -8,7 +8,7 @@ import type { DummyRuleMap } from 'oxlint';
  * - Full rules catalog: https://oxc.rs/docs/guide/usage/linter/rules.html#rules
  * - Fixable-only filter: https://oxc.rs/docs/guide/usage/linter/rules.html?sort=name&dir=asc&has_fix=true#rules
  */
-export const loosenRules: DummyRuleMap = {
+export const loosenRules = assertOxlintRules({
   'eslint/no-await-in-loop': 'off',
 
   /** Node/TS idioms — allow common double-underscore identifiers (requires oxlint >= 1.67). */
@@ -33,4 +33,4 @@ export const loosenRules: DummyRuleMap = {
       definedTags: ['finografic', 'finografic/design-system/styles/reset.css'],
     },
   ],
-};
+});
