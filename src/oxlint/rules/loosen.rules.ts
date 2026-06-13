@@ -26,6 +26,8 @@ export const loosenRules = assertOxlintRules({
   'typescript/consistent-return': 'off',
   'react-perf/jsx-no-new-function-as-prop': 'off',
   'react-perf/jsx-no-new-object-as-prop': 'off',
+  /** Slot-style props (`header={<Foo />}`) are intentional in layout components. */
+  'react-perf/jsx-no-jsx-as-prop': 'off',
 
   'jsdoc/check-tag-names': [
     'warn',
