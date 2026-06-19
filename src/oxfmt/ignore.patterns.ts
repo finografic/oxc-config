@@ -21,4 +21,10 @@ export const IGNORE_PATTERNS_FORMAT = [
   '**/.github/workflows/**',
   '**/.github/ISSUE_TEMPLATE/**',
   '**/.github/PULL_REQUEST_TEMPLATE/**',
+
+  // ── @finografic/icons generated outputs ─────────────
+  // jsdoc.capitalizeDescriptions rewrites lowercase paths in headers (index.ts → Index.ts).
+  '**/icons.generated.ts',
+  '**/icons/index.ts',
+  '**/icons/**/index.ts',
 ] as const satisfies OxfmtConfig['ignorePatterns'];
