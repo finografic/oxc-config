@@ -158,3 +158,7 @@ Remove old aliases: `formatting`, `patterns` (old path), `sorting-groups`, `type
    different composition pattern? (Check oxlint API before building `src/oxlint/index.ts`.)
 3. Existing consumers of `@finografic/oxfmt-config` — is a `MIGRATION_GUIDE.md` entry enough,
    or does the generator need a codemod/auto-update step?
+
+## Next
+
+No active follow-ups.

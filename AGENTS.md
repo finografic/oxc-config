@@ -1,5 +1,26 @@
 # AGENTS.md — AI Assistant Guide
 
+## Project Memory Model
+
+- `docs/todo/ROADMAP.md` = milestone plan, near-term tasks, and completed history.
+- `.agents/handoff.md` = stable current project state.
+- `.agents/memory.md` = chronological session log.
+
+Promote durable findings from memory → handoff, priorities and follow-ups → roadmap.
+
+Reference: [`docs/process/PROJECT_MEMORY_MODEL.md`](./docs/process/PROJECT_MEMORY_MODEL.md)
+
+---
+
+## Roadmap and Planning Docs
+
+- Check `ROADMAP.md` before proposing new initiatives.
+- Use `ROADMAP.md#next` for small follow-ups and manual validation.
+- Keep detailed plans in `docs/todo/TODO_*.md`; graduate completed plans to `DONE_*.md`.
+- Follow `.github/instructions/documentation/todo-done-docs.instructions.md`.
+
+---
+
 ## Rules — Project-Specific
 
 Project-specific rules live in `.github/instructions/project/*.instructions.md`.
@@ -23,7 +44,7 @@ Shared across Claude Code, Cursor, and GitHub Copilot.
 
 - TypeScript patterns: `.github/instructions/code/typescript-patterns.instructions.md`
 - Modern TS patterns: `.github/instructions/code/modern-typescript-patterns.instructions.md`
-- ESLint & style: `.github/instructions/code/linting-code-style.instructions.md`
+- Oxlint & style: `.github/instructions/code/linting-code-style.instructions.md`
 - Provider/context patterns: `.github/instructions/code/provider-context-patterns.instructions.md`
 - Picocolors CLI styling: `.github/instructions/code/picocolors-cli-styling.instructions.md`
 
@@ -63,25 +84,9 @@ Shared across Claude Code, Cursor, and GitHub Copilot.
 
 ---
 
-## Roadmap and Planning Docs
+## Cursor
 
-**`docs/todo/ROADMAP.md` is the primary high-level plan for this project.**
-**`docs/todo/NEXT_STEPS.md` is the near-term working list** — small tasks, fixes, and manual testing checklists too small for ROADMAP.
-
-- Before proposing or generating new features, check the roadmap for existing items.
-- When conceiving a new feature or initiative, add it to the appropriate priority tier.
-- Detailed planning docs live alongside in `docs/todo/` as `TODO_*.md` (active) or `DONE_*.md` (complete).
-- **TODO/DONE doc conventions:** `.github/instructions/documentation/todo-done-docs.instructions.md`
-  — rules for naming, status headers, checkboxes, and graduating `TODO_` → `DONE_`.
-
----
-
-## Claude Code — Session Memory and Handoff
-
-> This section applies to Claude Code only. Other agents can ignore it.
-
-- **Session log:** `.claude/memory.md` (gitignored) — maintenance rules are in that file.
-- **Project state snapshot:** `.agents/handoff.md` (git-tracked) — maintenance rules are in that file.
+- Always-on rules: `.cursor/rules/` (`alwaysApply` — entry point is `AGENTS.md`, same as `CLAUDE.md`)
 
 ---
 
