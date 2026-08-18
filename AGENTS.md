@@ -107,4 +107,4 @@ Shared across Claude Code, Cursor, and GitHub Copilot.
 - `SORTING_GROUP_PATH_ALIAS` (`path-alias`, pattern `@/**`) sits after `workspace` and before `lib-utils` in base and preset sort orders; `@finografic/**` / `@workspace/**` stay in `workspace`.
 - Base import-sort `customGroups`, `groups`, and shared options live in `src/oxfmt/sorting-groups/orders.ts`; `src/oxfmt/formatting/sorting.config.ts` imports from there — do not duplicate group patterns inline.
 - Avoid `as const` on `sortImports` / sorting group exports when spreading into `OxfmtConfig`; prefer `satisfies` plus explicit `OxfmtConfig` / `SortingPreset` typing so root `oxfmt.config.ts` type-checks.
-- The npm `globals` package is unused here (oxlint `env.globals` is unrelated); consumers do not need it. Published package name is `@finografic/oxc-config` only — not legacy `oxfmt-config`.
+- The npm `globals` package is unused here (oxlint `env.globals` is unrelated); consumers do not need it.

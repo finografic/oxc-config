@@ -7,7 +7,6 @@
     "finografic",
     "genx:type:config",
     "oxc-config",
-    "oxfmt-config",
     "oxlint-config",
     "shared-config"
   ],

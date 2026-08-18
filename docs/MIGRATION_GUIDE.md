@@ -2,85 +2,6 @@
 
 ---
 
-## v1.x → v2.0.0: Package rename to `@finografic/oxc-config`
-
-`@finografic/oxfmt-config` is now `@finografic/oxc-config`. The package now includes both oxfmt (formatter) and oxlint (linter) configuration in one install.
-
-### 1. Swap dependencies
-
-```bash
-# Remove old package
-pnpm remove @finografic/oxfmt-config
-
-# Add new package (includes both formatter and linter config)
-pnpm add -D @finografic/oxc-config
-```
-
-Add `oxlint` as a peer dep if not already installed:
-
-```bash
-pnpm add -D oxlint
-```
-
-### 2. Update import paths
-
-```diff
-- import { base, css, json, markdown, sorting, ignorePatterns } from '@finografic/oxfmt-config';
-+ import { base, css, json, markdown, sorting, ignorePatterns } from '@finografic/oxc-config/oxfmt';
-```
-
-Granular formatter exports live under the **`@finografic/oxc-config/oxfmt`** subpath. The package root also exposes **`oxfmtConfig`** if you prefer a single spreadable object.
-
-### 3. New exports (additive — no breaking changes)
-
-| Export                         | Type             | Purpose                                               |
-| ------------------------------ | ---------------- | ----------------------------------------------------- |
-| `html`                         | Preset           | HTML formatting options (previously unexported)       |
-| `react`                        | Preset           | JSX/React formatting options (previously unexported)  |
-| `jsdoc`                        | Preset           | JSDoc formatting block (already spread inside `base`) |
-| `oxfmtConfig`                  | object           | Ready-to-spread default oxfmt config (package root)   |
-| `oxlintConfig`                 | object           | Ready-to-spread default oxlint config (package root)  |
-| `plugins`                      | `string[]`       | Oxlint plugin list (`@finografic/oxc-config/oxlint`)  |
-| `env`, `options`               | objects          | Oxlint environment and tooling options                |
-| `categories`                   | object           | Category severities                                   |
-| `ignorePatterns`               | `string[]`       | Oxlint-specific ignore globs                          |
-| `rules`, `loosenRules`         | maps             | Composed rule set for oxlint                          |
-| `baseRules`, `typescriptRules` | maps             | Lower-level rule maps merged into `rules`             |
-| `testOverrides`                | `OxlintOverride` | Relaxed rules for test files                          |
-| `configOverrides`              | `OxlintOverride` | Allows default exports in config files                |
-
-### 4. Migrate your oxlint config to use shared pieces (optional)
-
-If you have an `oxlint.config.ts` in your project, import from **`@finografic/oxc-config/oxlint`** (or spread **`oxlintConfig`** from `@finografic/oxc-config`):
-
-```ts
-import { defineConfig } from 'oxlint';
-import type { OxlintConfig } from 'oxlint';
-import {
-  categories,
-  configOverrides,
-  env,
-  ignorePatterns,
-  loosenRules,
-  options,
-  plugins,
-  rules,
-  testOverrides,
-} from '@finografic/oxc-config/oxlint';
-
-export default defineConfig({
-  plugins: [...plugins],
-  env,
-  options,
-  categories,
-  rules: { ...rules, ...loosenRules },
-  overrides: [testOverrides, configOverrides],
-  ignorePatterns: [...ignorePatterns],
-} satisfies OxlintConfig);
-```
-
----
-
 ## Migrating from dprint
 
 ### 1. Swap dependencies
@@ -137,11 +58,11 @@ export default defineConfig({
 
 ### 3. Update `package.json` scripts
 
-| Before (dprint)                  | After (oxfmt)                                                                                 |
-| -------------------------------- | --------------------------------------------------------------------------------------------- |
-| `"format:check": "dprint check"` | `"format:check": "oxfmt --check"`                                                             |
-| `"format": "dprint fmt --diff"`  | `"format": "oxfmt"`                                                                           |
-| `"update.dprint-config": "..."`  | Remove (or replace with `"update.oxfmt-config": "pnpm add -D @finografic/oxc-config@latest"`) |
+| Before (dprint)                  | After (oxfmt)                                                                               |
+| -------------------------------- | ------------------------------------------------------------------------------------------- |
+| `"format:check": "dprint check"` | `"format:check": "oxfmt --check"`                                                           |
+| `"format": "dprint fmt --diff"`  | `"format": "oxfmt"`                                                                         |
+| `"update.dprint-config": "..."`  | Remove (or replace with `"update:oxc-config": "pnpm add -D @finografic/oxc-config@latest"`) |
 
 ### 4. Update lint-staged
 
@@ -231,13 +152,6 @@ When migrating **to `@finografic/oxc-config`** specifically, replace your `.pret
 ### Import sorting conflicts
 
 If your project uses ESLint `simple-import-sort` as the source of truth for import order, **do not enable** oxfmt's `sortImports`. The two tools may disagree on ordering. Omit `...sorting` or configure only `sorting.rules` / `sorting.sortPackageJson`.
-
-### Breaking rename in v1.0.0 (pre-v2)
-
-```diff
-- import { SORTING_GROUP_HOOKS_ROUTES } from '@finografic/oxfmt-config';
-+ import { SORTING_GROUP_HOOKS, SORTING_GROUP_CLIENT_ROUTES } from '@finografic/oxc-config/oxfmt';
-```
 
 ---
 

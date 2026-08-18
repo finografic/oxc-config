@@ -15,8 +15,6 @@ A guide to configuring oxfmt in this repo, including a critical gotcha that caus
 
 These are compiled to `dist/oxfmt.mjs` via `pnpm build` (tsdown). The root `oxfmt.config.ts` imports from the compiled dist — not from source — so TypeScript path aliases in `src/` do not affect the formatter binary.
 
-> **Package rename:** In v2.0.0 the package was renamed from `@finografic/oxfmt-config` to `@finografic/oxc-config`. Update your install command and import paths accordingly.
-
 ---
 
 ## The `$schema` gotcha

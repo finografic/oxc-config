@@ -1,15 +1,13 @@
 # Test if @finografic/oxc-config is formatting correctly
 
-> **Note:** v2.0.0 renamed the package from `@finografic/oxfmt-config` to `@finografic/oxc-config`.
-
 ```bash
-# 1. Build and pack (from oxfmt-config root)
+# 1. Build and pack (from the repo root)
 pnpm build
 pnpm pack
 # → creates finografic-oxc-config-<version>.tgz (name matches package.json version)
 
 # 2. Create a temp test project
-mkdir /tmp/test-oxfmt-config && cd /tmp/test-oxfmt-config
+mkdir /tmp/test-oxc-config && cd /tmp/test-oxc-config
 pnpm init
 pnpm add -D oxfmt
 

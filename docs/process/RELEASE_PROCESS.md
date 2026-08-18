@@ -64,20 +64,20 @@ When you run a release command:
    - Creates GitHub Release with auto-generated notes
 
 5. **GitHub Release appears**
-   - View at: `https://github.com/finografic/oxfmt-config/releases`
+   - View at: `https://github.com/finografic/oxc-config/releases`
 
 ## Verification
 
 After releasing, verify:
 
 1. **GitHub Release created**
-   - `https://github.com/finografic/oxfmt-config/releases`
+   - `https://github.com/finografic/oxc-config/releases`
 
 2. **Package published**
-   - `https://github.com/finografic/oxfmt-config/packages`
+   - `https://github.com/finografic/oxc-config/packages`
 
 3. **Workflow succeeded**
-   - `https://github.com/finografic/oxfmt-config/actions`
+   - `https://github.com/finografic/oxc-config/actions`
 
 ## Manual Steps
 

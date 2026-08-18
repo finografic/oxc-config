@@ -521,7 +521,7 @@ oxfmt picks up `oxfmt.config.ts` at the project root automatically. If you set `
 - [docs/SETUP_OXFMT_CONFIG.md](./docs/SETUP_OXFMT_CONFIG.md) — formatter gotchas, workflow, config object reference
 - [docs/SETUP_OXLINT_CONFIG.md](./docs/SETUP_OXLINT_CONFIG.md) — linter composition patterns, full pieces reference
 - [docs/OXFMT_SORT_GROUPS.md](./docs/OXFMT_SORT_GROUPS.md) — sorting groups deep-dive
-- [docs/MIGRATION_GUIDE.md](./docs/MIGRATION_GUIDE.md) — migrating from v1.x, dprint, or Prettier
+- [docs/MIGRATION_GUIDE.md](./docs/MIGRATION_GUIDE.md) — migrating from dprint or Prettier
 
 ## License
 
