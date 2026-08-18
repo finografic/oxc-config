@@ -47,6 +47,14 @@ export const oxlintClientConfig = defineOxlintPreset({
     suspicious: 'warn',
     perf: 'warn',
   },
-  rules: assertOxlintRules({ ...rules, ...loosenRules, 'react/react-in-jsx-scope': 'off' }),
+  rules: assertOxlintRules({
+    ...rules,
+    ...loosenRules,
+    'react/react-in-jsx-scope': 'off',
+    // Entry stylesheets are imported for their side effects — `import './globals.css'` is how Vite
+    // and Tailwind pull styles into the bundle, so flagging it fights the framework rather than the
+    // code. Both client consumers of this preset reached the same override independently.
+    'import/no-unassigned-import': ['warn', { allow: ['**/*.css'] }],
+  }),
   ignorePatterns: [...IGNORE_PATTERNS_LINT],
 });
