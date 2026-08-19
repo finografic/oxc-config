@@ -74,8 +74,8 @@ pnpm typecheck       # tsc --noEmit
 pnpm lint            # oxlint -c oxlint.config.ts
 pnpm lint:fix        # oxlint --fix
 pnpm format:check    # oxfmt --check
-pnpm format          # oxfmt
-pnpm check           # format:check + lint + typecheck + test:run
+pnpm format:fix      # oxfmt
+pnpm release:check   # format:check + lint:fix + typecheck + test:run
 pnpm schemas:update  # internal/schemas/*.schema.json from node_modules
 pnpm oxlint:config:capture / :capture:defaults  # internal/configs snapshots
 pnpm release:github:patch/minor/major

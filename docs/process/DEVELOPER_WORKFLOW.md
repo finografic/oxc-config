@@ -96,7 +96,7 @@ See `package.json` in the repo root for the canonical script list. Highlights:
 - **`pnpm dev`** — `tsdown --watch`
 - **`pnpm test` / `pnpm test:run`** — Vitest (watch vs single run)
 - **`pnpm lint` / `pnpm lint:fix`** — oxlint with root `oxlint.config.ts`
-- **`pnpm format` / `pnpm format:check`** — oxfmt with root `oxfmt.config.ts`
+- **`pnpm format:fix` / `pnpm format:check`** — oxfmt with root `oxfmt.config.ts`
 - **`pnpm typecheck`** — `tsc --noEmit`
 - **`pnpm schemas:update`** — copy oxfmt/oxlint JSON schemas into `internal/schemas/`
 - **`pnpm oxlint:config:capture`** — write resolved oxlint JSON to `internal/configs/oxlint.config.json`
