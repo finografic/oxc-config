@@ -74,9 +74,8 @@
     "·········· REGISTRIES": "················································",
     "view:registry:github": "pnpm view @finografic/oxc-config --registry=https://npm.pkg.github.com",
     "·········· PACKAGES": "··················································",
-    "update:core": "pnpm update @finografic/core --latest",
     "update:md-lint": "pnpm update @finografic/md-lint --latest",
-    "update:finografic:all": "pnpm update:core && update:md-lint",
+    "update:finografic:all": "pnpm update:md-lint",
     "update:deps:all": "pnpm update --latest",
     "·········· UTILS": "·····················································",
     "tsc:debug": "tsc --pretty --project tsconfig.json",
@@ -92,7 +91,6 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
-    "@finografic/core": "^0.16.1",
     "@finografic/md-lint": "^0.16.6",
     "@finografic/project-scripts": "^2.0.1",
     "@types/node": "24.12.0",

@@ -24,9 +24,6 @@ importers:
       '@commitlint/config-conventional':
         specifier: ^21.2.2
         version: 21.2.2
-      '@finografic/core':
-        specifier: ^0.16.1
-        version: 0.16.1
       '@finografic/md-lint':
         specifier: ^0.16.6
         version: 0.16.6
@@ -496,10 +493,6 @@ packages:
     engines: {node: '>=18'}
     cpu: [x64]
     os: [win32]
-
-  '@finografic/core@0.16.1':
-    resolution: {integrity: sha512-Mv3uY+fF6Qx73DvoVRh6XNNgjr+ZzZ1qENcQWP8PDB+1iK/qg3y3yJ4+HuhJPk9tHxWTzLkMYIO5Duz655Z/sQ==, tarball: https://npm.pkg.github.com/download/@finografic/core/0.16.1/c2e1971b0f8b0a70f009826b6e153258b990b041}
-    engines: {node: '>=24.19.0'}
 
   '@finografic/md-lint@0.16.6':
     resolution: {integrity: sha512-5GA8M3HV75wGEXfAc8lwmBYlQSY8KtIdA9IReePNspBPR0dWxg6AjYHKC9qzw0USzrj8uM/easqvB8BrxmOihQ==, tarball: https://npm.pkg.github.com/download/@finografic/md-lint/0.16.6/11d3bc70cfddd72ef6b21fe398a4ea407ef60e2c}
@@ -1884,9 +1877,6 @@ packages:
     engines: {node: '>=22.22.1'}
     hasBin: true
 
-  lodash@4.17.21:
-    resolution: {integrity: sha512-v2kDEe57lecTulaDIuNTPy3Ry4gLGJ6Z1O3vE1krgXZNrsQ+LFTGHVxVjcXPs17LhbZVGedAJv8XZ1tvj5FvSg==}
-
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
 
@@ -2784,12 +2774,6 @@ snapshots:
 
   '@esbuild/win32-x64@0.28.0':
     optional: true
-
-  '@finografic/core@0.16.1':
-    dependencies:
-      jsonc-parser: 3.3.1
-      lodash: 4.17.21
-      type-fest: 5.6.0
 
   '@finografic/md-lint@0.16.6':
     dependencies:
@@ -3765,8 +3749,6 @@ snapshots:
       tinyexec: 1.2.4
     optionalDependencies:
       yaml: 2.9.0
-
-  lodash@4.17.21: {}
 
   magic-string@0.30.21:
     dependencies:
